@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom'
 
 function Produk() {
   return (
-    <div className='bg-white px-60 py-10 border rounded-b-lg grid grid-cols-2 gap-5 absolute w-full'>
+    <div className='bg-white px-60 py-10 border rounded-b-lg grid grid-cols-2 gap-5 w-full'>
       <div className='bg-gray-300 py-5 rounded-lg'>
         <h1 className='text-center m-4'><a href='/sampah'>Beli Sampah</a></h1>
       </div>
@@ -37,7 +37,7 @@ function Navbar() {
             <li>Daftar</li>
         </ul>  
       </div>
-      <div className='relative'>
+      <div className=''>
       {open === true ? <Produk/> : ""}
       </div>
     </div>
