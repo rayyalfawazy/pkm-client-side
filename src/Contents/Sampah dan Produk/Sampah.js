@@ -4,7 +4,8 @@ import { Helmet } from 'react-helmet'
 import { BsBagDashFill, BsSearch } from 'react-icons/bs'
 import { useParams } from 'react-router-dom';
 
-const jenisSampah = [{title:'Plastik', routeRequest:'plastik'}, 
+const jenisSampah = [{title:'All', routeRequest:'all'},
+                    {title:'Plastik', routeRequest:'plastik'}, 
                     {title:'Kaca', routeRequest:'kaca'}, 
                     {title:'Kertas', routeRequest:'kertas'}, 
                     {title:'Kaleng', routeRequest:'kaleng'}, 
@@ -105,9 +106,15 @@ function Sampah() {
                     <FilterJenisSampah />
                 </aside>
                 <aside className='w-full space-y-5'>
-                    {dataSampah.map((ds) => (
-                        <SingleProduct nama={ds.nama_sampah} harga={ds.harga} berat={ds.berat} deskripsi={ds.deskripsi}/>
-                    ))}
+                    {String(jenisSampah) !== 'all' ? 
+                        dataSampah.filter((ds) => ds.jenis_sampah === String(jenisSampah)).map((fds) => (
+                            <SingleProduct nama={fds.nama_sampah} harga={fds.harga} berat={fds.berat} deskripsi={fds.deskripsi}/>
+                        ))
+                        :
+                        dataSampah.map((ds) => (
+                            <SingleProduct nama={ds.nama_sampah} harga={ds.harga} berat={ds.berat} deskripsi={ds.deskripsi}/>
+                        ))
+                    }
                 </aside>
             </section>
         </div>
