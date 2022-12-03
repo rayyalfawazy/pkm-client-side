@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState } from 'react';
-import { NavLink } from 'react-router-dom'
+import { NavLink, useParams, useLocation } from 'react-router-dom'
 
 function Produk() {
   return (
@@ -16,6 +16,7 @@ function Produk() {
 }
 
 function Navbar() {
+  const route = useLocation()
   const [open, makeOpen] = useState(false);
   const handleProdukDropdown = () => {
     makeOpen(true)
@@ -33,8 +34,7 @@ function Navbar() {
             <li>Tentang Kami</li>
         </ul>
         <ul className='flex space-x-6'>
-            <li>Masuk</li>
-            <li>Daftar</li>
+            <li><a href='/dashboard/sampah'>Dashboard</a></li>
         </ul>  
       </div>
       <div className=''>

@@ -7,14 +7,25 @@ import NotFound from './Contents/404nf';
 import JenisSampah from './Contents/Sampah dan Produk/JenisSampah';
 import Sampah from './Contents/Sampah dan Produk/Sampah';
 import Produk from './Contents/Sampah dan Produk/Produk';
+import DataOngkir from './Contents/Test Place/DataOngkir';
+import Dashboard from './Contents/Dashboard';
+import {CreateSampah, CreateProduk} from './Contents/TambahProduk';
+
+const ProtectedRoute = () => {
+
+} 
 
 const Router = () => (
   <Routes>
     <Route path='/' element={<App/>}/>
+    <Route path='/ongkir' element={<DataOngkir/>}/>
     <Route path='/sampah' element={<JenisSampah/>}/>
     <Route path='/sampah/:jenis' element={<Sampah/>}/>
     <Route path='/produk/' element={<Produk/>}/>
     <Route path='/produk/:jenis' element={<Produk/>}/>
+    <Route path='/dashboard/:jenis' element={<Dashboard/>}/>
+    <Route path='/dashboard/sampah/create' element={<CreateSampah/>}/>
+    <Route path='/dashboard/produk/create' element={<CreateProduk/>}/>
     <Route path='*' element={<NotFound/>}/>
   </Routes>
 )
