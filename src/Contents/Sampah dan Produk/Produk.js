@@ -63,7 +63,7 @@ function Produk() {
     return (
         <div>
             <Helmet>
-                <title>Title | Sampah</title>
+                <title>Title | Produk</title>
             </Helmet>
             <Navbar/>
             <form className='mx-60 mt-5 sticky top-24'>   
