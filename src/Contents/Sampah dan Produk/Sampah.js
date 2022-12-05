@@ -79,7 +79,6 @@ function Sampah() {
         return (
             <div>
                 <Navbar/>
-                
                 <p className='text-center mt-10 text-2xl animate-ping'>Loading...</p>
             </div>
         )
