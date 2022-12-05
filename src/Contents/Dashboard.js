@@ -37,7 +37,7 @@ function GetSampah() {
                   <p className='mb-5'>{deskripsi}.</p>
                   <div className='space-x-3'>
                     <a className='bg-blue-600 text-white p-3 rounded-lg hover:bg-blue-500 duration-150' href='/'>Edit Produk</a>
-                    <a onClick={() => delData(id)} className='bg-red-600 text-white p-3 rounded-lg hover:bg-red-500 duration-150'>Hapus Produk</a>
+                    <a onClick={() => delData(id)} className='bg-red-600 text-white p-3 rounded-lg hover:bg-red-500 duration-150' href='/dashboard/sampah'>Hapus Produk</a>
                   </div>
               </div>
           </div>
@@ -91,9 +91,10 @@ function GetProduct() {
               <div className='m-5 col-span-4 space-y-3'>
                   <h1 className='font-semibold text-2xl'>{nama}</h1>
                   <h2 className='font-semibold text-xl'>Rp.{harga}</h2>
-                  <div className='space-x-3'>
+                  <p>{deskripsi}.</p>
+                  <div className='space-x-3 block mt-5'>
                     <a className='bg-blue-600 text-white p-3 rounded-lg hover:bg-blue-500 duration-150' href='/'>Edit Produk</a>
-                    <a onClick={() => delData(id)} className='bg-red-600 text-white p-3 rounded-lg hover:bg-red-500 duration-150'>Hapus Produk</a>
+                    <a onClick={() => delData(id)} className='bg-red-600 text-white p-3 rounded-lg hover:bg-red-500 duration-150' href='/dashboard/produk'>Hapus Produk</a>
                   </div>
               </div>
           </div>
@@ -110,7 +111,7 @@ function GetProduct() {
     return (
         <div  className='space-y-3'>
             {data.map((d) => (
-                <SingleProduct nama={d.nama_produk} harga={d.harga.toLocaleString('en-US')} berat={d.berat} id={d.id}/>
+                <SingleProduct nama={d.nama_produk} harga={d.harga.toLocaleString('en-US')} berat={d.berat} id={d.id} deskripsi={d.deskripsi}/>
             ))}
         </div>
     )

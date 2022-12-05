@@ -13,10 +13,14 @@ export function CreateProduk() {
 
     const submit = async (e) => {
         e.preventDefault();
-        let formData = {"nama_sampah":null, 
-                        'jenis_sampah': null};
+        let formData = {"nama_produk":null, 
+                        'jenis_produk': null,
+                        'harga':null,
+                        'deskripsi':null};
         formData.nama_produk = nama
         formData.jenis_produk = jenis
+        formData.harga = harga
+        formData.deskripsi = deskripsi
         try {
             console.log(formData)
             await axios.post('http://localhost:5000/products', formData)
