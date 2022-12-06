@@ -14,7 +14,7 @@ function Produk() {
     </div>
   )
 }
-
+// Checkpoint Git
 function Navbar() {
   const [open, makeOpen] = useState(false);
   const handleProdukDropdown = () => {
