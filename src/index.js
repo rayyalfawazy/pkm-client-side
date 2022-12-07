@@ -14,11 +14,14 @@ import { CreateProduk } from './Contents/TambahProduk';
 import PasswordGet from './Contents/PasswordGet';
 import Unauthorized from './Contents/403ua';
 import { EditSampah } from './Contents/EditSampah';
+import { EditProduk } from './Contents/EditProduk';
 
 export const ProtectedRoutes = (sw) => {
   const auth = {'token':sw} 
   if (auth.token) {
     return <Outlet/>
+  } else {
+    return <Unauthorized/>
   }
 }
 
@@ -35,6 +38,7 @@ const Router = () => (
     <Route path='/dashboard' element={<PasswordGet/>}/>
     <Route element={<ProtectedRoutes/>}>
       <Route path='/dashboard/:jenis' element={<Dashboard/>} exact/>
+      <Route path='/dashboard/produk/edit/:id' element={<EditProduk/>} exact/>
       <Route path='/dashboard/produk/create' element={<CreateProduk/>} exact/>
       <Route path='/dashboard/sampah/edit/:id' element={<EditSampah/>} exact/>
       <Route path='/dashboard/sampah/create' element={<CreateSampah/>} exact/>

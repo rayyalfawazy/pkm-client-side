@@ -15,7 +15,7 @@ function PasswordGet() {
             navigate('/dashboard/sampah')
         } else {
             navigate('/403')
-        }   
+        }
     }
 
     return (

@@ -1,15 +1,27 @@
 import Navbar from '../Components/Navbar'
 import { useParams, useNavigate } from 'react-router-dom'
-import { useState, Component } from 'react'
+import { useState, Component, useEffect } from 'react'
 import axios from 'axios'
 
-export function CreateProduk() {
-    const params = String(Object.values(useParams()))
+export function EditProduk() {
+    const id = String(Object.values(useParams()))
     const [nama, setNama] = useState("");
     const [jenis, setJenis] = useState("");
     const [deskripsi, setDeskripsi] = useState("");
     const [harga, setHarga] = useState("");
     const navigate = useNavigate();
+
+    useEffect(() => {
+        getProductById()
+    }, []);
+
+    const getProductById = async () => {
+        const response = await axios.get(`http://localhost:5000/products/${id}`)
+        setNama(response.data.nama_produk)
+        setJenis(response.data.jenis_produk)
+        setHarga(response.data.harga)
+        setDeskripsi(response.data.deskripsi)
+    }
 
     const submit = async (e) => {
         e.preventDefault();
@@ -23,7 +35,7 @@ export function CreateProduk() {
         formData.deskripsi = deskripsi
         try {
             console.log(formData)
-            await axios.post('http://localhost:5000/products', formData)
+            await axios.put(`http://localhost:5000/products/${id}`, formData)
             navigate('/dashboard/produk')
         } catch (error) {
             console.log(error)
@@ -34,32 +46,32 @@ export function CreateProduk() {
         <div>
             <Navbar/>
             <form className='px-60 pt-5' onSubmit={submit}>
-                <h1>Tambah Produk Baru</h1>
+                <h1>Edit Sampah</h1>
                 <div className='border rounded-xl mt-5 p-3 space-y-4'>
                     <div className='m-3 grid grid-cols-4'>
-                        <label>Product Name</label>
-                        <input className='border rounded-md ml-5 px-2 py-2 col-span-3'
+                        <label>Product Name: </label>
+                        <input className='border-2 rounded-lg ml-5 px-2 py-2 col-span-3'
                                 type='text'
                                 value={nama}
                                 onChange={(e) => setNama(e.target.value)}/>
                     </div>
                     <div className='m-3 grid grid-cols-4'>
-                        <label>Product Type</label>
-                        <input className='border rounded-md ml-5 px-2 py-2 col-span-3'
+                        <label>Product Type: </label>
+                        <input className='border-2 rounded-lg ml-5 px-2 py-2 col-span-3'
                                 type='text'
                                 value={jenis}
                                 onChange={(e) => setJenis(e.target.value)}/>
                     </div>
                     <div className='m-3 grid grid-cols-4'>
-                        <label>Harga</label>
-                        <input className='border rounded-md ml-5 px-2 py-2 col-span-3'
+                        <label>Harga: </label>
+                        <input className='border-2 rounded-lg ml-5 px-2 py-2 col-span-3'
                                 type='text'
                                 value={harga}
                                 onChange={(e) => setHarga(e.target.value)}/>
                     </div>
                     <div className='m-3 grid grid-cols-4'>
-                        <label>Deskripsi</label>
-                        <textarea className='border rounded-md ml-5 px-2 py-2 col-span-3'
+                        <label>Deskripsi: </label>
+                        <textarea className='border-2 rounded-lg ml-5 px-2 py-2 col-span-3'
                                 type='text'
                                 value={deskripsi}
                                 onChange={(e) => setDeskripsi(e.target.value)}/>

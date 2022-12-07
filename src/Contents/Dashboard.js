@@ -93,7 +93,7 @@ function GetProduct() {
                   <h2 className='font-semibold text-xl'>Rp.{harga}</h2>
                   <p>{deskripsi}.</p>
                   <div className='space-x-3 block mt-5'>
-                    <a className='bg-blue-600 text-white p-3 rounded-lg hover:bg-blue-500 duration-150' href='/'>Edit Produk</a>
+                    <a className='bg-blue-600 text-white p-3 rounded-lg hover:bg-blue-500 duration-150' href={`/dashboard/produk/edit/${id}`}>Edit Produk</a>
                     <a onClick={() => delData(id)} className='bg-red-600 text-white p-3 rounded-lg hover:bg-red-500 duration-150' href='/dashboard/produk'>Hapus Produk</a>
                   </div>
               </div>
