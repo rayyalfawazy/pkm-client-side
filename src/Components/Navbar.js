@@ -38,7 +38,6 @@ function Navbar() {
         <ul className='flex space-x-6'>
             <li>
               { route.pathname !== `/dashboard/${route.pathname, params.jenis}` ? <a href='/dashboard'>Dashboard</a> : "" }
-              
             </li>
         </ul>  
       </div>
