@@ -59,7 +59,7 @@ function App() {
       </section>
       <footer className='bg-gray-500 py-16 px-60'>
         <p className='text-white'>©Brand 2022 - All rights reserved</p>
-        <p className='text-white'>Some Additional Stuff</p>
+        <p className='text-white'>Institut Teknologi Indonesia.</p>
       </footer>
     </div>
   );
