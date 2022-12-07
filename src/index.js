@@ -13,6 +13,7 @@ import Dashboard from './Contents/Dashboard';
 import { CreateProduk } from './Contents/TambahProduk'; 
 import PasswordGet from './Contents/PasswordGet';
 import Unauthorized from './Contents/403ua';
+import { EditSampah } from './Contents/EditSampah';
 
 export const ProtectedRoutes = (sw) => {
   const auth = {'token':sw} 
@@ -35,6 +36,7 @@ const Router = () => (
     <Route element={<ProtectedRoutes/>}>
       <Route path='/dashboard/:jenis' element={<Dashboard/>} exact/>
       <Route path='/dashboard/produk/create' element={<CreateProduk/>} exact/>
+      <Route path='/dashboard/sampah/edit/:id' element={<EditSampah/>} exact/>
       <Route path='/dashboard/sampah/create' element={<CreateSampah/>} exact/>
     </Route>
     <Route path='*' element={<NotFound/>}/>

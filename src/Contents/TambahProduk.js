@@ -36,30 +36,30 @@ export function CreateProduk() {
             <form className='px-60 pt-5' onSubmit={submit}>
                 <h1>Tambah Produk Baru</h1>
                 <div className='border rounded-xl mt-5 p-3 space-y-4'>
-                    <div className='m-3'>
+                    <div className='m-3 grid grid-cols-4'>
                         <label>Product Name</label>
-                        <input className='border rounded-md ml-5 px-2 py-2'
+                        <input className='border rounded-md ml-5 px-2 py-2 col-span-3'
                                 type='text'
                                 value={nama}
                                 onChange={(e) => setNama(e.target.value)}/>
                     </div>
-                    <div className='m-3'>
+                    <div className='m-3 grid grid-cols-4'>
                         <label>Product Type</label>
-                        <input className='border rounded-md ml-5 px-2 py-2'
+                        <input className='border rounded-md ml-5 px-2 py-2 col-span-3'
                                 type='text'
                                 value={jenis}
                                 onChange={(e) => setJenis(e.target.value)}/>
                     </div>
-                    <div className='m-3'>
+                    <div className='m-3 grid grid-cols-4'>
                         <label>Harga</label>
-                        <input className='border rounded-md ml-5 px-2 py-2'
+                        <input className='border rounded-md ml-5 px-2 py-2 col-span-3'
                                 type='text'
                                 value={harga}
                                 onChange={(e) => setHarga(e.target.value)}/>
                     </div>
-                    <div className='m-3'>
+                    <div className='m-3 grid grid-cols-4'>
                         <label>Deskripsi</label>
-                        <textarea className='border rounded-md ml-5 px-2 py-2'
+                        <textarea className='border rounded-md ml-5 px-2 py-2 col-span-3'
                                 type='text'
                                 value={deskripsi}
                                 onChange={(e) => setDeskripsi(e.target.value)}/>
