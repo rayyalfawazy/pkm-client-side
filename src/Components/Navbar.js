@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState } from 'react';
-import { NavLink } from 'react-router-dom'
+import { NavLink, useParams } from 'react-router-dom'
 
 function Produk() {
   return (
@@ -14,7 +14,7 @@ function Produk() {
     </div>
   )
 }
-// Checkpoint Git
+
 function Navbar() {
   const [open, makeOpen] = useState(false);
   const handleProdukDropdown = () => {
@@ -32,10 +32,13 @@ function Navbar() {
             <li><button onClick={handleProdukDropdown}>Produk</button></li>
             <li>Tentang Kami</li>
         </ul>
-        <ul className='flex space-x-6'>
+        {/* <ul className='flex space-x-6'>
             <li>Masuk</li>
             <li>Daftar</li>
-        </ul>  
+        </ul> */}
+        <ul className='flex space-x-6'>
+          <li>John Doe</li>
+        </ul>
       </div>
       <div className=''>
       {open === true ? <Produk/> : ""}
