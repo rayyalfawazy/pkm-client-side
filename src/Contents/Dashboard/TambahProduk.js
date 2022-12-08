@@ -1,4 +1,4 @@
-import Navbar from '../Components/Navbar'
+import Navbar from '../../Components/Navbar'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useState, Component } from 'react'
 import axios from 'axios'

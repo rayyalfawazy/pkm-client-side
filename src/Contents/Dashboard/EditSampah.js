@@ -1,10 +1,10 @@
-import Navbar from '../Components/Navbar'
+import Navbar from '../../Components/Navbar'
 import { useParams, useNavigate } from 'react-router-dom'
-import { useState, Component } from 'react'
+import { useState, Component, useEffect } from 'react'
 import axios from 'axios'
 
-export function CreateSampah() {
-    const params = String(Object.values(useParams()))
+export function EditSampah() {
+    const id = String(Object.values(useParams()))
     const [nama, setNama] = useState("");
     const [jenis, setJenis] = useState("");
     const [category, setCategory] = useState("");
@@ -12,6 +12,20 @@ export function CreateSampah() {
     const [harga, setHarga] = useState("");
     const [berat, setBerat] = useState("");
     const navigate = useNavigate();
+
+    useEffect(() => {
+        getProductById()
+    }, []);
+
+    const getProductById = async () => {
+        const response = await axios.get(`http://localhost:5000/sampah/${id}`)
+        setNama(response.data.nama_sampah)
+        setJenis(response.data.jenis_sampah)
+        setCategory(response.data.kategori_sampah)
+        setBerat(response.data.berat)
+        setHarga(response.data.harga)
+        setDeskripsi(response.data.deskripsi)
+    }
 
     const submit = async (e) => {
         e.preventDefault();
@@ -29,7 +43,7 @@ export function CreateSampah() {
         formData.deskripsi = deskripsi
         try {
             console.log(formData)
-            await axios.post('http://localhost:5000/sampah', formData)
+            await axios.put(`http://localhost:5000/sampah/${id}`, formData)
             navigate('/dashboard/sampah')
         } catch (error) {
             console.log(error)
@@ -40,7 +54,7 @@ export function CreateSampah() {
         <div>
             <Navbar/>
             <form className='px-60 pt-5' onSubmit={submit}>
-                <h1>Tambah Sampah Baru</h1>
+                <h1>Edit Sampah</h1>
                 <div className='border rounded-xl mt-5 p-3 space-y-4'>
                     <div className='m-3 grid grid-cols-4'>
                         <label>Product Name: </label>

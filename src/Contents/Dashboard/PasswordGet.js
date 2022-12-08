@@ -3,7 +3,6 @@ import Navbar from '../Components/Navbar'
 import { useState } from 'react';
 import { ProtectedRoutes } from '..';
 import { Navigate, useNavigate } from 'react-router-dom';
-import Unauthorized from './403ua';
 
 function PasswordGet() {
     const [password, setPassword] = useState("");

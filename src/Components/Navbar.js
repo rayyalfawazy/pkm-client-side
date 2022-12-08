@@ -1,6 +1,5 @@
 import React from 'react'
 import { useState } from 'react';
-import { NavLink, useParams } from 'react-router-dom'
 import { NavLink, useParams, useLocation } from 'react-router-dom'
 
 function Produk() {
@@ -17,6 +16,7 @@ function Produk() {
 }
 
 function Navbar() {
+  const [auth, setAuth] = useState()
   const route = useLocation()
   const params = useParams()
   const [open, makeOpen] = useState(false);
@@ -37,9 +37,17 @@ function Navbar() {
             <li>Tentang Kami</li>
         </ul>
         <ul className='flex space-x-6'>
+          {auth ? 
             <li>
               { route.pathname !== `/dashboard/${route.pathname, params.jenis}` ? <a href='/dashboard'>Dashboard</a> : "" }
             </li>
+          : 
+            <div className='flex space-x-6'>
+              <li>Login</li>
+              <li>Register</li>
+            </div>
+          }
+
         </ul>  
       </div>
       <div className=''>
