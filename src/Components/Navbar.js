@@ -32,7 +32,6 @@ function Navbar() {
             <li><button onClick={handleProdukDropdown}>Produk</button></li>
             <li>Tentang Kami</li>
         </ul>
-        {/* Checkpoint */}
         <ul className='flex space-x-6'>
             <li>Masuk</li>
             <li>Daftar</li>
