@@ -43,8 +43,8 @@ function Navbar() {
             </li>
           : 
             <div className='flex space-x-6'>
-              <li>Login</li>
-              <li>Register</li>
+              <li><a href='/user/login'>Login</a></li>
+              <li><a href='/user/register'>Register</a></li>
             </div>
           }
 

@@ -14,6 +14,8 @@ import { CreateProduk } from './Contents/Dashboard/TambahProduk';
 import Unauthorized from './Contents/403ua';
 import { EditSampah } from './Contents/Dashboard/EditSampah';
 import { EditProduk } from './Contents/Dashboard/EditProduk';
+import Login from './Contents/Login Register/Login';
+import Register from './Contents/Login Register/Register';
 
 export const ProtectedRoutes = (sw) => {
   const auth = {'token':sw} 
@@ -41,6 +43,8 @@ const Router = () => (
       <Route path='/dashboard/sampah/edit/:id' element={<EditSampah/>} exact/>
       <Route path='/dashboard/sampah/create' element={<CreateSampah/>} exact/>
     </Route>
+    <Route path='/user/login' element={<Login/>}/>
+    <Route path='/user/register' element={<Register/>}/>
     <Route path='*' element={<NotFound/>}/>
     <Route path='/403' element={<Unauthorized/>}/>
   </Routes>

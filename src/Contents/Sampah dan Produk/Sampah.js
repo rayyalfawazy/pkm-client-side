@@ -50,7 +50,7 @@ const FilterCategory = () => {
 }
 
 
-const SingleProduct = ({nama, harga, berat, deskripsi}) => {
+const SingleProduct = ({nama, harga, berat, deskripsi, jenis, kategori}) => {
   return (
     <div className='border rounded-lg grid grid-cols-5'>
         <div className='bg-gray-500 rounded-l-lg'></div>
@@ -59,6 +59,10 @@ const SingleProduct = ({nama, harga, berat, deskripsi}) => {
             <h2 className='font-semibold text-xl'>Rp.{harga.toLocaleString('en-US')}</h2>
             <h2 className='font-semibold text-md text-gray-500'>Berat : {berat} Kg</h2>
             <p>{deskripsi}.</p>
+            <ul className='flex space-x-5'>
+                <li className='uppercase bg-gray-300 text-gray-900 px-2 font-semibold'>{jenis}</li>
+                <li className='uppercase bg-gray-300 text-gray-900 px-2 font-semibold'>{kategori}</li>
+            </ul>
             <button className='bg-green-600 py-2 px-3 text-white'>Add to Cart</button>
         </div>
     </div>
@@ -107,11 +111,11 @@ function Sampah() {
                 <aside className='w-full space-y-5'>
                     {String(jenisSampah) !== 'all' ? 
                         dataSampah.filter((ds) => ds.jenis_sampah === String(jenisSampah)).map((fds) => (
-                            <SingleProduct nama={fds.nama_sampah} harga={fds.harga} berat={fds.berat} deskripsi={fds.deskripsi}/>
+                            <SingleProduct nama={fds.nama_sampah} harga={fds.harga} berat={fds.berat} deskripsi={fds.deskripsi} jenis={fds.jenis_sampah} kategori={fds.kategori_sampah}/>
                         ))
                         :
                         dataSampah.map((ds) => (
-                            <SingleProduct nama={ds.nama_sampah} harga={ds.harga} berat={ds.berat} deskripsi={ds.deskripsi}/>
+                            <SingleProduct nama={ds.nama_sampah} harga={ds.harga} berat={ds.berat} deskripsi={ds.deskripsi} jenis={ds.jenis_sampah} kategori={ds.kategori_sampah}/>
                         ))
                     }
                 </aside>
