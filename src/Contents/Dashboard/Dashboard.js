@@ -2,7 +2,7 @@ import axios from 'axios'
 import {useEffect, useState} from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import Navbar from '../../Components/Navbar'
-
+import TextTruncate from 'react-text-truncate'
 
 
 function GetSampah() {
@@ -34,7 +34,13 @@ function GetSampah() {
                   <h1 className='font-semibold text-2xl'>{nama}</h1>
                   <h2 className='font-semibold text-xl'>Rp.{harga}</h2>
                   <h2 className='font-semibold text-md text-gray-500'>Berat : {berat} Kg</h2>
-                  <p className='mb-5'>{deskripsi}.</p>
+                  <TextTruncate
+                        line={1}
+                        element="span"
+                        truncateText="…"
+                        text={`${deskripsi}.`}
+                        textTruncateChild={<a href="#"></a>}
+                    />
                   <div className='space-x-3'>
                     <a className='bg-blue-600 text-white p-3 rounded-lg hover:bg-blue-500 duration-150' href={`/dashboard/sampah/edit/${id}`}>Edit Produk</a>
                     <a onClick={() => delData(id)} className='bg-red-600 text-white p-3 rounded-lg hover:bg-red-500 duration-150' href='/dashboard/sampah'>Hapus Produk</a>
@@ -91,7 +97,14 @@ function GetProduct() {
               <div className='m-5 col-span-4 space-y-3'>
                   <h1 className='font-semibold text-2xl'>{nama}</h1>
                   <h2 className='font-semibold text-xl'>Rp.{harga}</h2>
-                  <p>{deskripsi}.</p>
+                  <TextTruncate
+                        line={1}
+                        element="span"
+                        truncateText="…"
+                        text={`${deskripsi}.`}
+                        textTruncateChild={<a href="#"></a>}
+                    />
+                    <br/>
                   <div className='space-x-3 block mt-5'>
                     <a className='bg-blue-600 text-white p-3 rounded-lg hover:bg-blue-500 duration-150' href={`/dashboard/produk/edit/${id}`}>Edit Produk</a>
                     <a onClick={() => delData(id)} className='bg-red-600 text-white p-3 rounded-lg hover:bg-red-500 duration-150' href='/dashboard/produk'>Hapus Produk</a>
