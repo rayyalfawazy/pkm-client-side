@@ -80,7 +80,7 @@ function Produk() {
                     <h1 className='font-semibold text-xl'>Filter</h1>
                     <FilterJenisSampah />
                 </aside>
-                <aside className='grid grid-cols-4 space-x-5 '>
+                <aside className='w-full space-y-5'>
                     {String(jenisProduk) !== 'all' ? 
                         dataProduk.filter((dp) => dp.jenis_produk === String(jenisProduk)).map((fdp) => (
                             <SingleProduct nama={fdp.nama_produk} harga={fdp.harga}/>
