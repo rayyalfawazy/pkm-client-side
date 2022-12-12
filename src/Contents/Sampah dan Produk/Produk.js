@@ -28,13 +28,14 @@ const FilterJenisSampah = () => {
 }
 
 
-const SingleProduct = ({nama, harga}) => {
+const SingleProduct = ({nama, harga, deskripsi}) => {
   return (
     <div className='border rounded-lg grid grid-cols-5'>
         <div className='bg-gray-500 rounded-l-lg'></div>
         <div className='m-5 col-span-4 space-y-3'>
             <h1 className='font-semibold text-2xl'>{nama}</h1>
             <h2 className='font-semibold text-xl'>Rp.{harga.toLocaleString('en-US')}</h2>
+            <p>{deskripsi}.</p>
             <button className='bg-green-600 py-2 px-3 text-white'>Add to Cart</button>
         </div>
     </div>
@@ -84,11 +85,11 @@ function Produk() {
                 <aside className='w-full space-y-5'>
                     {String(jenisProduk) !== 'all' ? 
                         dataProduk.filter((dp) => dp.jenis_produk === String(jenisProduk)).map((fdp) => (
-                            <SingleProduct nama={fdp.nama_produk} harga={fdp.harga}/>
+                            <SingleProduct nama={fdp.nama_produk} harga={fdp.harga} deskripsi={fdp.deskripsi}/>
                         ))
                         :
                         dataProduk.map((dp) => (
-                            <SingleProduct nama={dp.nama_produk} harga={dp.harga}/>
+                            <SingleProduct nama={dp.nama_produk} harga={dp.harga} deskripsi={dp.deskripsi}/>
                         ))
                     }
                 </aside>
