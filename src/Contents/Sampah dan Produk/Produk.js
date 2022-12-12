@@ -35,15 +35,11 @@ const SingleProduct = ({nama, harga, deskripsi, kategori}) => {
         <div className='space-y-2 ml-4 mt-4 mr-16'>
             <h1 className='font-semibold text-xl'>{nama}</h1>
             <h2 className='font-semibold text-xl'>Rp.{harga.toLocaleString('en-US')}</h2>
-<<<<<<< HEAD
-            <button className='bg-green-600 py-1 rounded-md px-3 text-white'>Add to Cart</button>
-=======
             <p>{deskripsi}.</p>
             <ul className='flex space-x-5'>
                 <li className='uppercase bg-gray-300 text-gray-900 px-2 font-semibold'>{kategori}</li>
             </ul>
             <button className='bg-green-600 py-2 px-3 text-white'>Add to Cart</button>
->>>>>>> 66f62387dc0b42165764a6a46ec9f4abbcccbf3f
         </div>
     </div>
   )

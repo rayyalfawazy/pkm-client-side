@@ -6,10 +6,8 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import NotFound from './Contents/404nf';
 import JenisSampah from './Contents/Sampah dan Produk/JenisSampah';
 import Sampah from './Contents/Sampah dan Produk/Sampah';
-import Produk from './Contents/Sampah dan Produk/Produk';
 import { CreateSampah } from './Contents/Dashboard/TambahSampah';
 import Produk from './Contents/Sampah dan Produk/Produk';
-import DataOngkir from './Contents/Test Place/DataOngkir';
 import Dashboard from './Contents/Dashboard/Dashboard';
 import { CreateProduk } from './Contents/Dashboard/TambahProduk'; 
 import Unauthorized from './Contents/403ua';
