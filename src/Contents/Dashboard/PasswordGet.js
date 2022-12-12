@@ -1,7 +1,7 @@
 import React from 'react'
-import Navbar from '../Components/Navbar'
+import Navbar from '../../Components/Navbar';
 import { useState } from 'react';
-import { ProtectedRoutes } from '..';
+import { ProtectedRoutes } from '../..';
 import { Navigate, useNavigate } from 'react-router-dom';
 
 function PasswordGet() {

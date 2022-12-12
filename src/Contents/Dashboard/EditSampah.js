@@ -99,7 +99,7 @@ export function EditSampah() {
                                 onChange={(e) => setDeskripsi(e.target.value)}/>
                     </div>
                     <button className='py-2 px-4 bg-green-500 rounded-lg text-white'
-                            type='submit'>Update Produk</button>
+                            type='submit'>Update Sampah</button>
                 </div>
             </form>
         </div>

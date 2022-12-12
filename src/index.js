@@ -6,15 +6,15 @@ import { BrowserRouter, Routes, Route, Outlet, Navigate } from 'react-router-dom
 import NotFound from './Contents/404nf';
 import JenisSampah from './Contents/Sampah dan Produk/JenisSampah';
 import Sampah from './Contents/Sampah dan Produk/Sampah';
-import { CreateSampah } from './Contents/TambahSampah';
+import { CreateSampah } from './Contents/Dashboard/TambahSampah';
 import Produk from './Contents/Sampah dan Produk/Produk';
 import DataOngkir from './Contents/Test Place/DataOngkir';
-import Dashboard from './Contents/Dashboard';
-import { CreateProduk } from './Contents/TambahProduk'; 
-import PasswordGet from './Contents/PasswordGet';
+import Dashboard from './Contents/Dashboard/Dashboard';
+import { CreateProduk } from './Contents/Dashboard/TambahProduk'; 
+import PasswordGet from './Contents/Dashboard/PasswordGet';
 import Unauthorized from './Contents/403ua';
-import { EditSampah } from './Contents/EditSampah';
-import { EditProduk } from './Contents/EditProduk';
+import { EditSampah } from './Contents/Dashboard/EditSampah';
+import { EditProduk } from './Contents/Dashboard/EditProduk';
 
 export const ProtectedRoutes = (sw) => {
   const auth = {'token':sw} 
