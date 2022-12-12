@@ -1,7 +1,6 @@
 import React from 'react'
 import { useState } from 'react';
 import { NavLink, useParams } from 'react-router-dom'
-import { NavLink, useParams, useLocation } from 'react-router-dom'
 
 function Produk() {
   return (
@@ -10,15 +9,13 @@ function Produk() {
         <h1 className='text-center m-4'><a href='/sampah'>Beli Sampah</a></h1>
       </div>
       <div className='bg-gray-300 py-5 rounded-lg'>
-        <h1 className='text-center m-4'><a href='/produk/all'>Beli Produk</a></h1>
+        <h1 className='text-center m-4'><a href='/produk/plastik'>Beli Produk</a></h1>
       </div>
     </div>
   )
 }
 
 function Navbar() {
-  const route = useLocation()
-  const params = useParams()
   const [open, makeOpen] = useState(false);
   const handleProdukDropdown = () => {
     makeOpen(true)
@@ -26,7 +23,6 @@ function Navbar() {
       makeOpen(false)
     }
   }
-  
   return (
     <div className='sticky top-0'>
       <div className='border-b-2 border-red-600 px-60 py-5 flex justify-between bg-white'>
@@ -36,11 +32,13 @@ function Navbar() {
             <li><button onClick={handleProdukDropdown}>Produk</button></li>
             <li>Tentang Kami</li>
         </ul>
+        {/* <ul className='flex space-x-6'>
+            <li>Masuk</li>
+            <li>Daftar</li>
+        </ul> */}
         <ul className='flex space-x-6'>
-            <li>
-              { route.pathname !== `/dashboard/${route.pathname, params.jenis}` ? <a href='/dashboard'>Dashboard</a> : "" }
-            </li>
-        </ul>  
+          <li>John Doe</li>
+        </ul>
       </div>
       <div className=''>
       {open === true ? <Produk/> : ""}
