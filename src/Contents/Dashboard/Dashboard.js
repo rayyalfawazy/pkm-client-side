@@ -127,8 +127,8 @@ function Dashboard() {
                     <div className='fixed'>                    
                         <h1 className='text-lg font-semibold border-b-2 border-gray-600'>Data Produk</h1>
                         <ul className='space-y-1'>
-                            <li><a className={params === 'produk' ? 'text-red-600' : ""} href='/dashboard/produk'>Produk Kerajinan</a></li>
-                            <li><a className={params === 'sampah' ? 'text-red-600' : ""} href='/dashboard/sampah'>Produk Sampah</a></li>
+                            <li><a className={params === 'produk' ? 'text-red-600 border' : ''} href='/dashboard/produk'>Produk Kerajinan</a></li>
+                            <li><a className={params === 'sampah' ? 'text-red-600 border' : ''} href='/dashboard/sampah'>Produk Sampah</a></li>
                         </ul>
                     </div>
                 </div>

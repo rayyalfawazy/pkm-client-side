@@ -46,7 +46,7 @@ export function EditProduk() {
         <div>
             <Navbar/>
             <form className='px-60 pt-5' onSubmit={submit}>
-                <h1>Edit Sampah</h1>
+                <h1>Edit Produk</h1>
                 <div className='border rounded-xl mt-5 p-3 space-y-4'>
                     <div className='m-3 grid grid-cols-4'>
                         <label>Product Name: </label>
