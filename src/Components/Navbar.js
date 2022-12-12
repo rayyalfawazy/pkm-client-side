@@ -30,7 +30,7 @@ function Navbar() {
         <ul className='flex space-x-6'>
             <li><NavLink to='/'>Beranda</NavLink></li>
             <li><button onClick={handleProdukDropdown}>Produk</button></li>
-            <li>Tentang Kami</li>
+            <li>FAQ</li>
         </ul>
         <ul className='flex space-x-6'>
             <li>Masuk</li>

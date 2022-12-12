@@ -57,6 +57,11 @@ function App() {
           </ul>
         </div>
       </section>
+      <section className='mt-20 mb-20 mx-60'>
+        <div>
+          <h1 className='text-2xl font-semibold'>Frequently Asked Question</h1>
+        </div>
+      </section>
       <footer className='bg-gray-500 py-16 px-60'>
         <p className='text-white'>©Brand 2022 - All rights reserved</p>
         <p className='text-white'>Institut Teknologi Indonesia.</p>
