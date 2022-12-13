@@ -36,8 +36,8 @@ function Navbar() {
             <li>Tentang Kami</li>
         </ul>
         <ul className='flex space-x-6'>
-            <li>Masuk</li>
-            <li>Daftar</li>
+            <li><a href='/user/login'>Masuk</a></li>
+            <li><a href='/user/register'>Daftar</a></li>
         </ul>
       </div>
       <div className=''>

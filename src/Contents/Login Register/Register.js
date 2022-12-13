@@ -10,8 +10,12 @@ function Register() {
                 <h1 className='text-center font-semibold text-3xl'>Register</h1>
                 <hr className='mt-5'/>
                 <div className='mt-5'>
-                    <label>Username</label>
-                    <input type='text' className='border p-2 rounded-md w-full mt-2' placeholder='Username Here'/>
+                    <label>Email</label>
+                    <input type='email' className='border p-2 rounded-md w-full mt-2' placeholder='Email Here'/>
+                </div>
+                <div className='mt-5'>
+                    <label>Full Name</label>
+                    <input type='text' className='border p-2 rounded-md w-full mt-2' placeholder='Email Here'/>
                 </div>
                 <div className='mt-5'>
                     <label>Password</label>

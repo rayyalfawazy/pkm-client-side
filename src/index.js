@@ -6,24 +6,18 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import NotFound from './Contents/404nf';
 import JenisSampah from './Contents/Sampah dan Produk/JenisSampah';
 import Sampah from './Contents/Sampah dan Produk/Sampah';
-import { CreateSampah } from './Contents/Dashboard/TambahSampah';
 import Produk from './Contents/Sampah dan Produk/Produk';
-import Dashboard from './Contents/Dashboard/Dashboard';
-import { CreateProduk } from './Contents/Dashboard/TambahProduk'; 
-import Unauthorized from './Contents/403ua';
-import { EditSampah } from './Contents/Dashboard/EditSampah';
-import { EditProduk } from './Contents/Dashboard/EditProduk';
 import Login from './Contents/Login Register/Login';
 import Register from './Contents/Login Register/Register';
 
-export const ProtectedRoutes = (sw) => {
-  const auth = {'token':sw} 
-  if (auth.token) {
-    return <Outlet/>
-  } else {
-    return <Unauthorized/>
-  }
-}
+// export const ProtectedRoutes = (sw) => {
+//   const auth = {'token':sw} 
+//   if (auth.token) {
+//     return <Outlet/>
+//   } else {
+//     return <Unauthorized/>
+//   }
+// }
 
 
 
@@ -34,13 +28,13 @@ const Router = () => (
     <Route path='/sampah/:jenis' element={<Sampah/>}/>
     <Route path='/produk/' element={<Produk/>}/>
     <Route path='/produk/:jenis' element={<Produk/>}/>
-    <Route element={<ProtectedRoutes/>}>
+    {/* <Route element={<ProtectedRoutes/>}>
       <Route path='/dashboard/:jenis' element={<Dashboard/>} exact/>
       <Route path='/dashboard/produk/edit/:id' element={<EditProduk/>} exact/>
       <Route path='/dashboard/produk/create' element={<CreateProduk/>} exact/>
       <Route path='/dashboard/sampah/edit/:id' element={<EditSampah/>} exact/>
       <Route path='/dashboard/sampah/create' element={<CreateSampah/>} exact/>
-    </Route>
+    </Route> */}
     <Route path='/user/login' element={<Login/>}/>
     <Route path='/user/register' element={<Register/>}/>
     <Route path='*' element={<NotFound/>}/>
