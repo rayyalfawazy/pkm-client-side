@@ -137,14 +137,14 @@ function Dashboard() {
             <Navbar/>
             <div className='grid grid-cols-5 gap-10'>
                 <div className='pl-10 pt-10 pr-10 h-16 space-y-3 sticky top-20'>
-                    <div className=''>                    
+                    <div>                    
                         <h1 className='text-lg font-semibold border-b-2 border-gray-600'>Data Produk</h1>
                         <ul className='space-y-1'>
                             <li><a className={params === 'produk' ? 'text-red-600 border-l-8 border-red-400' : ''} href='/dashboard/produk'>Produk Kerajinan</a></li>
                             <li><a className={params === 'sampah' ? 'text-red-600 border-l-8 border-red-400' : ''} href='/dashboard/sampah'>Produk Sampah</a></li>
                         </ul>
                     </div>
-                    <div className=''>                    
+                    <div>                    
                         <h1 className='text-lg font-semibold border-b-2 border-gray-600'>Pembukuan</h1>
                         <ul className='space-y-1'>
                             <li><a className='' href='/dashboard/pembukuan'>Pembukuan</a></li>
