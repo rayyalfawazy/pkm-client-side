@@ -51,11 +51,11 @@ export default function Pembukuan() {
                     <a className='bg-green-600 text-white p-3 rounded-lg hover:bg-green-500 duration-150' href={`/dashboard/pembukuan/create`}>Tambah Pembukuan</a>
                 </div>
                 {/* Search Bar */}
-                <form className='mx-60 mt-5 sticky top-24'>   
+                <form className='mr-60 mt-5 sticky top-24'>   
                     <label htmlFor="default-search" className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
                     <div className="relative">
                         <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                            <BsSearch className='text-gray-300'/>
+                            <BsSearch className='text-gray-500'/>
                         </div>
                         <input type="search" onChange={(e) => {setQuerySearch(e.target.value)}} id="default-search" className="block w-full p-4 pl-10 text-sm text-gray-900 border rounded-lg bg-gray-200 drop-shadow-xl hover:drop-shadow-md duration-150" placeholder="Cari Pembukuan disini..."/>
                     </div>
