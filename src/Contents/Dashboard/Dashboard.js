@@ -147,8 +147,7 @@ function Dashboard() {
                     <div>                    
                         <h1 className='text-lg font-semibold border-b-2 border-gray-600'>Pembukuan</h1>
                         <ul className='space-y-1'>
-                            <li><a className='' href='/dashboard/pembukuan'>Pembukuan</a></li>
-                            <li><a className='' href=''>Catat Pembukuan</a></li>
+                            <li><a href='/dashboard/pembukuan'>Pembukuan</a></li>
                         </ul>
                     </div>
                 </div>
