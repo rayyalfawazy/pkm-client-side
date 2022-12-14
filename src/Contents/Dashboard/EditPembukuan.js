@@ -3,6 +3,19 @@ import { useParams, useNavigate } from 'react-router-dom'
 import { useState, Component, useEffect } from 'react'
 import axios from 'axios'
 
+const kategori_penjualan_list = [
+    {title:'Sampah', value:'sampah'},
+    {title:'Produk Kerajinan', value:'produk'}
+]
+
+const jenis_sampah_list = [
+    {title:'Plastik', value:'plastik'}, 
+    {title:'Kaca', value:'kaca'}, 
+    {title:'Kertas', value:'kertas'}, 
+    {title:'Kaleng', value:'kaleng'}, 
+    {title:'Limbah Elektronik', value:'limbahelektronik'}
+]
+
 export function EditPembukuan() {
     const id = String(Object.values(useParams()))
     const [namaMember, setNamaMember] = useState("");
@@ -76,17 +89,19 @@ export function EditPembukuan() {
                     </div>
                     <div className='m-3 grid grid-cols-4'>
                         <label>Kategori Penjualan</label>
-                        <input className='border rounded-md ml-5 px-2 py-2 col-span-3'
-                                type='text'
-                                value={kategoriPenjualan}
-                                onChange={(e) => setKategoriPenjualan(e.target.value)}/>
+                        <select className='border rounded-md ml-5 px-2 py-2 col-span-3' value={kategoriPenjualan} onChange={(e) => setKategoriPenjualan(e.target.value)} >
+                            {kategori_penjualan_list.map((kpl) => (
+                                <option value={kpl.value}>{kpl.title}</option>
+                            ))}
+                        </select>
                     </div>
                     <div className='m-3 grid grid-cols-4'>
                         <label>Jenis Sampah</label>
-                        <input className='border rounded-md ml-5 px-2 py-2 col-span-3'
-                                type='text'
-                                value={jenis}
-                                onChange={(e) => setJenis(e.target.value)}/>
+                        <select className='border rounded-md ml-5 px-2 py-2 col-span-3' value={jenis} onChange={(e) => setKategoriPenjualan(e.target.value)} >
+                            {jenis_sampah_list.map((jsl) => (
+                                <option value={jsl.value}>{jsl.title}</option>
+                            ))}
+                        </select>
                     </div>
                     <button className='py-2 px-4 bg-green-500 rounded-lg text-white'
                             type='submit'>Update Produk</button>
