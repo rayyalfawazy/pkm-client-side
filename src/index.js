@@ -9,6 +9,18 @@ import Sampah from './Contents/Sampah dan Produk/Sampah';
 import Produk from './Contents/Sampah dan Produk/Produk';
 import Login from './Contents/Login Register/Login';
 import Register from './Contents/Login Register/Register';
+import { CreateSampah } from './Contents/Dashboard/TambahSampah';
+import Produk from './Contents/Sampah dan Produk/Produk';
+import DataOngkir from './Contents/Test Place/DataOngkir';
+import Dashboard from './Contents/Dashboard/Dashboard';
+import { CreateProduk } from './Contents/Dashboard/TambahProduk'; 
+import PasswordGet from './Contents/Dashboard/PasswordGet';
+import Unauthorized from './Contents/403ua';
+import { EditSampah } from './Contents/Dashboard/EditSampah';
+import { EditProduk } from './Contents/Dashboard/EditProduk';
+import Pembukuan from './Contents/Dashboard/Pembukuan';
+import { CreatePembukuan } from './Contents/Dashboard/TambahPembukuan';
+import { EditPembukuan } from './Contents/Dashboard/EditPembukuan';
 
 // export const ProtectedRoutes = (sw) => {
 //   const auth = {'token':sw} 
@@ -28,13 +40,13 @@ const Router = () => (
     <Route path='/sampah/:jenis' element={<Sampah/>}/>
     <Route path='/produk/' element={<Produk/>}/>
     <Route path='/produk/:jenis' element={<Produk/>}/>
-    {/* <Route element={<ProtectedRoutes/>}>
+    <Route element={<ProtectedRoutes/>}>
       <Route path='/dashboard/:jenis' element={<Dashboard/>} exact/>
       <Route path='/dashboard/produk/edit/:id' element={<EditProduk/>} exact/>
       <Route path='/dashboard/produk/create' element={<CreateProduk/>} exact/>
       <Route path='/dashboard/sampah/edit/:id' element={<EditSampah/>} exact/>
       <Route path='/dashboard/sampah/create' element={<CreateSampah/>} exact/>
-    </Route> */}
+    </Route>
     <Route path='/user/login' element={<Login/>}/>
     <Route path='/user/register' element={<Register/>}/>
     <Route path='*' element={<NotFound/>}/>

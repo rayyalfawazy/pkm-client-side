@@ -3,6 +3,7 @@ import Navbar from '../../Components/Navbar'
 import { Helmet } from 'react-helmet'
 import { BsBagDashFill, BsSearch } from 'react-icons/bs'
 import { useParams } from 'react-router-dom';
+import TextTruncate from 'react-text-truncate'
 
 const jenisSampah = [{title:'All', routeRequest:'all'},
                     {title:'Plastik', routeRequest:'plastik'}, 
@@ -13,13 +14,20 @@ const jenisSampah = [{title:'All', routeRequest:'all'},
 
 
 const FilterJenisSampah = () => {
+    const params = String(Object.values(useParams()))
     return (
         <div>
-            <div className=' mt-3 pl-2 pr-5 py-3 shadow-md'>
-                <h1 className='font-semibold text-xl mx-2 border-b pb-3'>Jenis Sampah - (Jenis Sampah)</h1>
+            {jenisSampah.map((jnsp) => (
+                    params === jnsp.routeRequest ?
+                    <h2 className='font-semibold text-xl ml-2 pr-28 pb-3'>{jnsp.title}</h2>
+                    :
+                    ""
+                ))}
+            <div className='mt-3 pl-2 py-3 shadow-md pr-28'>
+                <h2 className='font-semibold text-xl ml-2 pr-28 border-b-2 pb-3'>Jenis Produk</h2>
                 <ul className='mx-2 space-y-2 mt-2'>
                     {jenisSampah.map((jnsp) => (
-                        <li><a href={`/produk/${jnsp.routeRequest}`}>{jnsp.title}</a></li>
+                        <li><a className={params === jnsp.routeRequest ? 'text-red-600 border-l-8 border-red-400' : 'hover:text-red-400 hover:border-red-400 hover:border-l-4 duration-150'} href={`/produk/${jnsp.routeRequest}`}>{jnsp.title}</a></li>
                     ))}
                 </ul>
             </div>
@@ -35,10 +43,14 @@ const SingleProduct = ({nama, harga, deskripsi, kategori}) => {
         <div className='space-y-2 ml-4 mt-4 mr-16'>
             <h1 className='font-semibold text-xl'>{nama}</h1>
             <h2 className='font-semibold text-xl'>Rp.{harga.toLocaleString('en-US')}</h2>
-            <p>{deskripsi}.</p>
-            <ul className='flex space-x-5'>
-                <li className='uppercase bg-gray-300 text-gray-900 px-2 font-semibold'>{kategori}</li>
-            </ul>
+            <TextTruncate
+                line={1}
+                element="span"
+                truncateText="…"
+                text={`${deskripsi}.`}
+                textTruncateChild={<a href="#"></a>}
+            />
+            <br/>
             <button className='bg-green-600 py-2 px-3 text-white'>Add to Cart</button>
         </div>
     </div>
@@ -82,17 +94,16 @@ function Produk() {
             </form>
             <section className='px-60 mt-10 flex space-x-5'>
                 <aside>
-                    <h1 className='font-semibold text-xl'>Filter</h1>
                     <FilterJenisSampah />
                 </aside>
                 <aside className='grid grid-cols-4 space-x-5 '>
                     {String(jenisProduk) !== 'all' ? 
                         dataProduk.filter((dp) => dp.jenis_produk === String(jenisProduk)).map((fdp) => (
-                            <SingleProduct nama={fdp.nama_produk} harga={fdp.harga} deskripsi={fdp.deskripsi} kategori={fdp.jenis_produk}/>
+                            <SingleProduct nama={fdp.nama_produk} harga={fdp.harga} deskripsi={fdp.deskripsi}/>
                         ))
                         :
                         dataProduk.map((dp) => (
-                            <SingleProduct nama={dp.nama_produk} harga={dp.harga} deskripsi={dp.deskripsi} kategori={dp.jenis_produk}/>
+                            <SingleProduct nama={dp.nama_produk} harga={dp.harga} deskripsi={dp.deskripsi}/>
                         ))
                     }
                 </aside>
