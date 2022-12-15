@@ -12,6 +12,7 @@ import { CreateSampah } from './Contents/Dashboard/TambahSampah';
 import Produk from './Contents/Sampah dan Produk/Produk';
 import Dashboard from './Contents/Dashboard/Dashboard';
 import { CreateProduk } from './Contents/Dashboard/TambahProduk'; 
+import Unauthorized from './Contents/403ua';
 import PasswordGet from './Contents/Dashboard/PasswordGet';
 import { EditSampah } from './Contents/Dashboard/EditSampah';
 import { EditProduk } from './Contents/Dashboard/EditProduk';
@@ -37,6 +38,7 @@ const Router = () => (
     <Route path='/sampah/:jenis' element={<Sampah/>}/>
     <Route path='/produk/' element={<Produk/>}/>
     <Route path='/produk/:jenis' element={<Produk/>}/>
+    <Route path='/dashboard' element={<PasswordGet/>} exact/>
     <Route element={<ProtectedRoutes/>}>
       <Route path='/dashboard/:jenis' element={<Dashboard/>} exact/>
       <Route path='/dashboard/produk/edit/:id' element={<EditProduk/>} exact/>
