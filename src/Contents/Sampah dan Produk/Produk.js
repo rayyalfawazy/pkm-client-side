@@ -1,7 +1,7 @@
 import { useState,useEffect } from 'react'
 import Navbar from '../../Components/Navbar'
 import { Helmet } from 'react-helmet'
-import { BsBagDashFill, BsSearch } from 'react-icons/bs'
+import { BsSearch } from 'react-icons/bs'
 import { useParams } from 'react-router-dom';
 
 const jenisSampah = [{title:'All', routeRequest:'all'},

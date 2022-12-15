@@ -1,7 +1,7 @@
 import { useState,useEffect } from 'react'
 import Navbar from '../../Components/Navbar'
 import { Helmet } from 'react-helmet'
-import { BsBagDashFill, BsSearch } from 'react-icons/bs'
+import { BsSearch } from 'react-icons/bs'
 import { useParams } from 'react-router-dom';
 
 const jenisSampah = [{title:'All', routeRequest:'all'},
@@ -11,11 +11,11 @@ const jenisSampah = [{title:'All', routeRequest:'all'},
                     {title:'Kaleng', routeRequest:'kaleng'}, 
                     {title:'Limbah Elektronik', routeRequest:'limbahelektronik'}]
 
-const category = [{title:'Multi Layer', routeRequest:'multilayer'}, 
-                    {title:'Botol', routeRequest:'botol'}, 
-                    {title:'Kemasan', routeRequest:'kemasan'}, 
-                    {title:'Trash Bag', routeRequest:'trashbag'}, 
-                    {title:'Styrofoam', routeRequest:'styrofoam'}]
+// const category = [{title:'Multi Layer', routeRequest:'multilayer'}, 
+//                     {title:'Botol', routeRequest:'botol'}, 
+//                     {title:'Kemasan', routeRequest:'kemasan'}, 
+//                     {title:'Trash Bag', routeRequest:'trashbag'}, 
+//                     {title:'Styrofoam', routeRequest:'styrofoam'}]
 
 const FilterJenisSampah = () => {
     return (
@@ -32,22 +32,22 @@ const FilterJenisSampah = () => {
     );
 }
 
-const FilterCategory = () => {
-    return (
-        <div>
-            <div className=' mt-3 pl-2 pr-5 py-3 shadow-md'>
-                <h1 className='font-semibold text-xl mx-2 border-b pb-3'>Kategori - (Kategori)</h1>
-                <ul className='mx-2 space-y-2 mt-2'>
-                    {jenisSampah.map((jnsp) => (
-                        category.map((c) => (
-                            <li><a href={`/sampah/${jnsp.route}?category=${c.routeRequest}`}>{c.title}</a></li>
-                        ))
-                    ))}
-                </ul>
-            </div>
-        </div>
-    );
-}
+// const FilterCategory = () => {
+//     return (
+//         <div>
+//             <div className=' mt-3 pl-2 pr-5 py-3 shadow-md'>
+//                 <h1 className='font-semibold text-xl mx-2 border-b pb-3'>Kategori - (Kategori)</h1>
+//                 <ul className='mx-2 space-y-2 mt-2'>
+//                     {jenisSampah.map((jnsp) => (
+//                         category.map((c) => (
+//                             <li><a href={`/sampah/${jnsp.route}?category=${c.routeRequest}`}>{c.title}</a></li>
+//                         ))
+//                     ))}
+//                 </ul>
+//             </div>
+//         </div>
+//     );
+// }
 
 
 const SingleProduct = ({nama, harga, berat, deskripsi}) => {
