@@ -1,5 +1,4 @@
-import React from 'react'
-import { useState } from 'react';
+import React, { useEffect, useState } from 'react'
 import { useNavigate, NavLink, useParams, useLocation } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { LogOut, reset } from '../Feature/AuthSlice'
@@ -47,7 +46,8 @@ function AuthNavbar() {
             <li>Tentang Kami</li>
         </ul> */}
         <ul className='flex space-x-6'>
-            <li><button onClick={logout} href='!#'>Log Out</button></li>
+          <li></li>
+          <li><button onClick={logout}>Log Out</button></li>
         </ul>
       </div>
       {/* <div className=''>

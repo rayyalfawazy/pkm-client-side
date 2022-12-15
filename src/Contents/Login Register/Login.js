@@ -20,8 +20,9 @@ function Login() {
     useEffect(() =>{
         if (user || isSuccess) {
             navigate('/dashboard/sampah')
+        } else {
+            dispatch(reset());
         }
-        dispatch(reset());
     },[user, isSuccess, dispatch, navigate])
 
   return (

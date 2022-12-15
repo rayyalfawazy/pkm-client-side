@@ -1,7 +1,9 @@
-import Navbar from '../../Components/Navbar'
 import { useParams, useNavigate } from 'react-router-dom'
-import { useState, Component } from 'react'
+import { useState, Component, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { getMe } from '../../Feature/AuthSlice'
 import axios from 'axios'
+import AuthNavbar from '../../Components/AuthNavbar'
 
 export function CreateSampah() {
     const params = String(Object.values(useParams()))
@@ -12,6 +14,19 @@ export function CreateSampah() {
     const [harga, setHarga] = useState("");
     const [berat, setBerat] = useState("");
     const navigate = useNavigate();
+
+    const dispatch = useDispatch();
+    const {isError} = useSelector((state => state.auth))
+
+    useEffect(()=>{
+        dispatch(getMe())
+    },[dispatch])
+
+    useEffect(()=>{
+        if (isError) {
+            navigate('/user/login')
+        }
+    },[isError, navigate])
 
     const submit = async (e) => {
         e.preventDefault();
@@ -38,7 +53,7 @@ export function CreateSampah() {
     
     return (
         <div>
-            <Navbar/>
+            <AuthNavbar/>
             <form className='px-60 pt-5' onSubmit={submit}>
                 <h1>Tambah Sampah Baru</h1>
                 <div className='border rounded-xl mt-5 p-3 space-y-4'>

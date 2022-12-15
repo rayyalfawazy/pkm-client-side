@@ -1,4 +1,6 @@
-import Navbar from '../../Components/Navbar'
+import AuthNavbar from '../../Components/AuthNavbar'
+import { useDispatch, useSelector } from 'react-redux'
+import { getMe } from '../../Feature/AuthSlice'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useState, Component, useEffect } from 'react'
 import axios from 'axios'
@@ -14,6 +16,19 @@ export function EditProduk() {
     useEffect(() => {
         getProductById()
     }, []);
+
+    const dispatch = useDispatch();
+    const {isError} = useSelector((state => state.auth))
+
+    useEffect(()=>{
+        dispatch(getMe())
+    },[dispatch])
+
+    useEffect(()=>{
+        if (isError) {
+            navigate('/user/login')
+        }
+    },[isError, navigate])
 
     const getProductById = async () => {
         const response = await axios.get(`http://localhost:5000/products/${id}`)
@@ -44,7 +59,7 @@ export function EditProduk() {
     
     return (
         <div>
-            <Navbar/>
+            <AuthNavbar/>
             <form className='px-60 pt-5' onSubmit={submit}>
                 <h1>Edit Sampah</h1>
                 <div className='border rounded-xl mt-5 p-3 space-y-4'>
