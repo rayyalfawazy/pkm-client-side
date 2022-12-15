@@ -1,8 +1,10 @@
 import axios from 'axios'
 import {useEffect, useState} from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
-import Navbar from '../../Components/Navbar'
 import TextTruncate from 'react-text-truncate'
+import AuthNavbar from '../../Components/AuthNavbar'
+import { useDispatch, useSelector } from 'react-redux'
+import { getMe } from '../../Feature/AuthSlice'
 
 
 function GetSampah() {
@@ -65,7 +67,6 @@ function GetSampah() {
         </div>
     )
 }
-
 
 function GetProduct() {
     const [data, setData] = useState(null)
@@ -132,9 +133,23 @@ function GetProduct() {
 
 function Dashboard() {
     const params = String(Object.values(useParams()))
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const {isError} = useSelector((state => state.auth))
+
+    useEffect(()=>{
+        dispatch(getMe())
+    },[dispatch])
+
+    useEffect(()=>{
+        if (isError) {
+            navigate('/user/login')
+        }
+    },[isError, navigate])
+
     return (
         <div>
-            <Navbar/>
+            <AuthNavbar/>
             <div className='grid grid-cols-5 gap-10'>
                 <div className='pl-10 pt-10 pr-10 h-16 space-y-3 sticky top-20'>
                     <div>                    

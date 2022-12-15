@@ -1,6 +1,8 @@
 import React from 'react'
 import { useState } from 'react';
 import { useNavigate, NavLink, useParams, useLocation } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { LogOut, reset } from '../Feature/AuthSlice'
 
 function Produk() {
   return (
@@ -15,37 +17,45 @@ function Produk() {
   )
 }
 
-function Navbar() {
-  const [auth, setAuth] = useState()
+function AuthNavbar() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { user } = useSelector((state) => state.auth)
   const route = useLocation()
   const params = useParams()
-  const [open, makeOpen] = useState(false);
-  const handleProdukDropdown = () => {
-    makeOpen(true)
-    if (open === true) {
-      makeOpen(false)
-    }
+
+  const logout = () => {
+    dispatch(LogOut());
+    dispatch(reset());
+    navigate('/user/login')
   }
+
+  // const [open, makeOpen] = useState(false);
+  // const handleProdukDropdown = () => {
+  //   makeOpen(true)
+  //   if (open === true) {
+  //     makeOpen(false)
+  //   }
+  // }
   return (
     <div className='sticky top-0'>
       <div className='border-b-2 border-red-600 px-60 py-5 flex justify-between bg-white'>
         <h1 className='font-bold drop-shadow-xl text-red-800 text-xl'>BRAND</h1>
-        <ul className='flex space-x-6'>
+        {/* <ul className='flex space-x-6'>
             <li><NavLink to='/'>Beranda</NavLink></li>
             <li><button onClick={handleProdukDropdown}>Produk</button></li>
             <li>Tentang Kami</li>
-        </ul>
+        </ul> */}
         <ul className='flex space-x-6'>
-            <li><a href='/user/login'>Masuk</a></li>
-            <li><a href='/user/register'>Daftar</a></li>
+            <li><button onClick={logout} href='!#'>Log Out</button></li>
         </ul>
       </div>
-      <div className=''>
+      {/* <div className=''>
       {open === true ? <Produk/> : ""}
-      </div>
+      </div> */}
     </div>
 
   )
 }
 
-export default Navbar
+export default AuthNavbar

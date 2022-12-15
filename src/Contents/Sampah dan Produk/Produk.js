@@ -2,7 +2,7 @@ import { useState,useEffect } from 'react'
 import Navbar from '../../Components/Navbar'
 import { Helmet } from 'react-helmet'
 import { BsBagDashFill, BsSearch } from 'react-icons/bs'
-import { useParams } from 'react-router-dom';
+import { Navigate, useParams, useNavigate } from 'react-router-dom';
 import TextTruncate from 'react-text-truncate'
 
 const jenisSampah = [{title:'All', routeRequest:'all'},
@@ -60,6 +60,7 @@ const SingleProduct = ({nama, harga, deskripsi, kategori}) => {
 
 
 function Produk() {
+    const navigate = useNavigate()
     const jenisProduk = Object.values(useParams("plastik"))
     const [dataProduk, setDataProduk] = useState(null)
     useEffect(() => {
@@ -67,7 +68,6 @@ function Produk() {
         .then((response) => response.json())
         .then((json) => setDataProduk(json))
     }, []);
-
     if (dataProduk === null) {
         return (
             <div>

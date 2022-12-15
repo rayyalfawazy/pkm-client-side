@@ -2,6 +2,7 @@ import Navbar from '../../Components/Navbar'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useState, Component, useEffect } from 'react'
 import axios from 'axios'
+import AuthNavbar from '../../Components/AuthNavbar'
 
 export function EditSampah() {
     const id = String(Object.values(useParams()))
@@ -52,7 +53,7 @@ export function EditSampah() {
     
     return (
         <div>
-            <Navbar/>
+            <AuthNavbar/>
             <form className='px-60 pt-5' onSubmit={submit}>
                 <h1>Edit Sampah</h1>
                 <div className='border rounded-xl mt-5 p-3 space-y-4'>
