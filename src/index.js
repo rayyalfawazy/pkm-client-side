@@ -2,34 +2,31 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Outlet } from 'react-router-dom'
 import NotFound from './Contents/404nf';
 import JenisSampah from './Contents/Sampah dan Produk/JenisSampah';
 import Sampah from './Contents/Sampah dan Produk/Sampah';
-import Produk from './Contents/Sampah dan Produk/Produk';
 import Login from './Contents/Login Register/Login';
 import Register from './Contents/Login Register/Register';
 import { CreateSampah } from './Contents/Dashboard/TambahSampah';
 import Produk from './Contents/Sampah dan Produk/Produk';
-import DataOngkir from './Contents/Test Place/DataOngkir';
 import Dashboard from './Contents/Dashboard/Dashboard';
 import { CreateProduk } from './Contents/Dashboard/TambahProduk'; 
 import PasswordGet from './Contents/Dashboard/PasswordGet';
-import Unauthorized from './Contents/403ua';
 import { EditSampah } from './Contents/Dashboard/EditSampah';
 import { EditProduk } from './Contents/Dashboard/EditProduk';
 import Pembukuan from './Contents/Dashboard/Pembukuan';
 import { CreatePembukuan } from './Contents/Dashboard/TambahPembukuan';
 import { EditPembukuan } from './Contents/Dashboard/EditPembukuan';
 
-// export const ProtectedRoutes = (sw) => {
-//   const auth = {'token':sw} 
-//   if (auth.token) {
-//     return <Outlet/>
-//   } else {
-//     return <Unauthorized/>
-//   }
-// }
+export const ProtectedRoutes = (sw) => {
+  const auth = {'token':sw} 
+  if (auth.token) {
+    return <Outlet/>
+  } else {
+    return <Unauthorized/>
+  }
+}
 
 
 
