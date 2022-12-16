@@ -1,4 +1,3 @@
-
 function AuthInformation({name, role}) {
   return (
     <div>

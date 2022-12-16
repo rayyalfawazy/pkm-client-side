@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getMe } from '../../Feature/AuthSlice'
 import axios from 'axios'
 import AuthNavbar from '../../Components/AuthNavbar'
+import { ip } from '../../Host'
 
 export function CreateSampah() {
     const params = String(Object.values(useParams()))
@@ -44,7 +45,7 @@ export function CreateSampah() {
         formData.deskripsi = deskripsi
         try {
             console.log(formData)
-            await axios.post('http://localhost:5000/sampah', formData)
+            await axios.post(`http://${ip}:5000/sampah`, formData)
             navigate('/dashboard/sampah')
         } catch (error) {
             console.log(error)

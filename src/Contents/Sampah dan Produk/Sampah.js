@@ -4,6 +4,7 @@ import { Helmet } from 'react-helmet'
 import { BsBagDashFill, BsSearch } from 'react-icons/bs'
 import { useParams } from 'react-router-dom';
 import TextTruncate from 'react-text-truncate'
+import { ip } from '../../Host';
 
 const jenisSampah = [{title:'All', routeRequest:'all'},
                     {title:'Plastik', routeRequest:'plastik'}, 
@@ -66,6 +67,10 @@ const SingleProduct = ({nama, harga, berat, deskripsi, jenis, kategori, user}) =
             <h1 className='font-semibold text-2xl'>{nama}</h1>
             <h2 className='font-semibold text-xl'>Rp.{harga.toLocaleString('en-US')}</h2>
             <h2 className='font-semibold text-md text-gray-500'>Berat : {berat} Kg</h2>
+            <h2 className='font-semibold text-md text-gray-500'>Dibuat Oleh : {user}</h2>
+            <div className='flex'>
+                <h5 className='uppercase bg-slate-500 text-slate-100 px-2'>{jenis}</h5>
+            </div>
             <TextTruncate
                 line={1}
                 element="span"
@@ -86,15 +91,14 @@ function Sampah() {
     const jenisSampah = Object.values(useParams())
     const [dataSampah, setDataSampah] = useState(null)
     useEffect(() => {
-        fetch('http://localhost:5000/home/sampah')
+        fetch(`http://${ip}:5000/home/sampah`)
         .then((response) => response.json())
         .then((json) => setDataSampah(json))
-    }, []);
+    }, [dataSampah]);
     if (dataSampah === null) {
         return (
             <div>
                 <Navbar/>
-                
                 <p className='text-center mt-10 text-2xl animate-ping'>Loading...</p>
             </div>
         )
@@ -122,11 +126,11 @@ function Sampah() {
                 <aside className='w-full space-y-5'>
                     {String(jenisSampah) !== 'all' ? 
                         dataSampah.filter((ds) => ds.jenis_sampah === String(jenisSampah)).map((fds) => (
-                            <SingleProduct nama={fds.nama_sampah} harga={fds.harga} berat={fds.berat} deskripsi={fds.deskripsi} jenis={fds.jenis_sampah} kategori={fds.kategori_sampah}/>
+                            <SingleProduct nama={fds.nama_sampah} harga={fds.harga} berat={fds.berat} deskripsi={fds.deskripsi} jenis={fds.jenis_sampah} user={fds.user.name} kategori={fds.kategori_sampah}/>
                         ))
                         :
                         dataSampah.map((ds) => (
-                            <SingleProduct nama={ds.nama_sampah} harga={ds.harga} berat={ds.berat} deskripsi={ds.deskripsi} jenis={ds.jenis_sampah} kategori={ds.kategori_sampah}/>
+                            <SingleProduct nama={ds.nama_sampah} harga={ds.harga} berat={ds.berat} deskripsi={ds.deskripsi} jenis={ds.jenis_sampah} user={ds.user.name} kategori={ds.kategori_sampah}/>
                         ))
                     }
                 </aside>

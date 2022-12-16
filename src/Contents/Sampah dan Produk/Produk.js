@@ -4,6 +4,7 @@ import { Helmet } from 'react-helmet'
 import { BsBagDashFill, BsSearch } from 'react-icons/bs'
 import { Navigate, useParams, useNavigate } from 'react-router-dom';
 import TextTruncate from 'react-text-truncate'
+import { ip } from '../../Host';
 
 const jenisSampah = [{title:'All', routeRequest:'all'},
                     {title:'Plastik', routeRequest:'plastik'}, 
@@ -72,7 +73,7 @@ function Produk() {
     const jenisProduk = Object.values(useParams("plastik"))
     const [dataProduk, setDataProduk] = useState(null)
     useEffect(() => {
-        fetch('http://localhost:5000/home/products')
+        fetch(`http://${ip}:5000/home/products`)
         .then((response) => response.json())
         .then((json) => setDataProduk(json))
     }, []);

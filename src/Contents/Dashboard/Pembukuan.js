@@ -3,14 +3,33 @@ import { useParams, useNavigate, json } from 'react-router-dom'
 import Navbar from '../../Components/Navbar'
 import { BsBagDashFill, BsSearch } from 'react-icons/bs'
 import axios from 'axios';
+import AuthNavbar from '../../Components/AuthNavbar';
+import { useDispatch, useSelector } from 'react-redux'
+import { getMe } from '../../Feature/AuthSlice'
+import AuthInformation from './AuthInformation'
+import { ip } from '../../Host';
 
 export default function Pembukuan() {
     const [pembukuan, setPembukuan] = useState([])
     const [jumlahPenjualan, setJumlahPenjualan] = useState()
     const [querySearch, setQuerySearch] = useState("")
     const params = String(Object.values(useParams()))
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const {isError, user} = useSelector((state) => state.auth)
+
+    useEffect(()=>{
+        dispatch(getMe())
+    },[dispatch])
+
+    useEffect(()=>{
+        if (isError) {
+            navigate('/user/login')
+        }
+    },[isError, navigate, user])
+
     const fetchData = async(e) => {
-        const response = await axios.get(`http://localhost:5000/pembukuan/filter?search=${querySearch}`)
+        const response = await axios.get(`http://${ip}:5000/pembukuan/filter?search=${querySearch}`)
         setPembukuan(response.data)
     }
     useEffect(()=>{
@@ -19,7 +38,7 @@ export default function Pembukuan() {
 
     const delData = async (Id) => {
         try {
-            await axios.delete(`http://localhost:5000/pembukuan/${Id}`)
+            await axios.delete(`http://${ip}:5000/pembukuan/${Id}`)
             fetchData()
         } catch (error) {
             console.log(error)
@@ -28,7 +47,7 @@ export default function Pembukuan() {
 
     return (
     <div>
-        <Navbar/>
+        <AuthNavbar/>
         <div className='grid grid-cols-5 gap-10'>
             <div className='pl-10 pt-10 pr-10 h-16 space-y-3 sticky top-20'>
                 <div>                    

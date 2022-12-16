@@ -2,6 +2,7 @@ import Navbar from '../../Components/Navbar'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useState, Component } from 'react'
 import axios from 'axios'
+import { ip } from '../../Host'
 
 const kategori_penjualan_list = [
     {title:'Sampah', value:'sampah'},
@@ -40,7 +41,7 @@ export function CreatePembukuan() {
         formData.jenis_sampah = jenis
         try {
             // console.log(formData)
-            await axios.post('http://localhost:5000/pembukuan', formData)
+            await axios.post(`http://${ip}:5000/pembukuan`, formData)
             navigate('/dashboard/pembukuan')
         } catch (error) {
             console.log(error)

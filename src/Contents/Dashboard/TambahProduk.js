@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getMe } from '../../Feature/AuthSlice'
 import axios from 'axios'
 import AuthNavbar from '../../Components/AuthNavbar'
+import { ip } from '../../Host'
 
 export function CreateProduk() {
     const params = String(Object.values(useParams()))
@@ -38,7 +39,7 @@ export function CreateProduk() {
         formData.deskripsi = deskripsi
         try {
             console.log(formData)
-            await axios.post('http://localhost:5000/products', formData)
+            await axios.post(`http://${ip}:5000/products`, formData)
             navigate('/dashboard/produk')
         } catch (error) {
             console.log(error)

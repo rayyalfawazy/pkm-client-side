@@ -5,6 +5,7 @@ import AuthNavbar from '../../Components/AuthNavbar'
 import { useDispatch, useSelector } from 'react-redux'
 import { getMe } from '../../Feature/AuthSlice'
 import axios from 'axios'
+import { ip } from '../../Host'
 
 const kategori_penjualan_list = [
     {title:'Sampah', value:'sampah'},
@@ -42,7 +43,7 @@ export function EditPembukuan() {
     },[isError, navigate])
 
     const getProductById = async () => {
-        const response = await axios.get(`http://localhost:5000/pembukuan/${id}`)
+        const response = await axios.get(`http://${ip}:5000/pembukuan/${id}`)
         setNamaMember(response.data.nama_member)
         setTanggal(response.data.tanggal_penjualan)
         setTotalPenjualan(response.data.total_penjualan)
@@ -65,7 +66,7 @@ export function EditPembukuan() {
         formData.jenis_sampah = jenis
         try {
             console.log(formData)
-            await axios.put(`http://localhost:5000/pembukuan/${id}`, formData)
+            await axios.put(`http://${ip}:5000/pembukuan/${id}`, formData)
             navigate('/dashboard/pembukuan')
         } catch (error) {
             console.log(error)

@@ -33,11 +33,11 @@ function Login() {
                 <h1 className='text-center font-semibold text-3xl'>Login</h1>
                 <hr className='mt-5'/>
                 <div className='mt-5'>
-                    <label>Username</label>
+                    <label>Email</label>
                     <input 
-                        type='text' 
+                        type='email' 
                         className='border p-2 rounded-md w-full mt-2' 
-                        placeholder='Username Here'
+                        placeholder='Email Here'
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         required
