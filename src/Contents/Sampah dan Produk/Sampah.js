@@ -68,8 +68,9 @@ const SingleProduct = ({nama, harga, berat, deskripsi, jenis, kategori, user}) =
             <h2 className='font-semibold text-xl'>Rp.{harga.toLocaleString('en-US')}</h2>
             <h2 className='font-semibold text-md text-gray-500'>Berat : {berat} Kg</h2>
             <h2 className='font-semibold text-md text-gray-500'>Dibuat Oleh : {user}</h2>
-            <div className='flex'>
+            <div className='flex space-x-3'>
                 <h5 className='uppercase bg-slate-500 text-slate-100 px-2'>{jenis}</h5>
+                <h5 className='uppercase bg-slate-500 text-slate-100 px-2'>{kategori}</h5>
             </div>
             <TextTruncate
                 line={1}
@@ -126,11 +127,22 @@ function Sampah() {
                 <aside className='w-full space-y-5'>
                     {String(jenisSampah) !== 'all' ? 
                         dataSampah.filter((ds) => ds.jenis_sampah === String(jenisSampah)).map((fds) => (
-                            <SingleProduct nama={fds.nama_sampah} harga={fds.harga} berat={fds.berat} deskripsi={fds.deskripsi} jenis={fds.jenis_sampah} user={fds.user.name} kategori={fds.kategori_sampah}/>
+                            <SingleProduct nama={fds.nama_sampah} 
+                                            harga={fds.harga} berat={fds.berat} 
+                                            deskripsi={fds.deskripsi} 
+                                            jenis={fds.jenis_sampah} 
+                                            user={fds.user.name} 
+                                            kategori={fds.kategori_sampah}/>
                         ))
                         :
                         dataSampah.map((ds) => (
-                            <SingleProduct nama={ds.nama_sampah} harga={ds.harga} berat={ds.berat} deskripsi={ds.deskripsi} jenis={ds.jenis_sampah} user={ds.user.name} kategori={ds.kategori_sampah}/>
+                            <SingleProduct nama={ds.nama_sampah} 
+                                            harga={ds.harga} 
+                                            berat={ds.berat} 
+                                            deskripsi={ds.deskripsi} 
+                                            jenis={ds.jenis_sampah} 
+                                            user={ds.user.name} 
+                                            kategori={ds.kategori_sampah}/>
                         ))
                     }
                 </aside>

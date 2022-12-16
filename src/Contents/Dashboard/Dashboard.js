@@ -30,7 +30,7 @@ function GetSampah() {
         }
     }
 
-    const SingleProductSampah = ({id, nama, harga, berat, deskripsi, user}) => {
+    const SingleProductSampah = ({id, nama, harga, berat, jenis, kategori,  deskripsi, user}) => {
         return (
           <div className='border rounded-lg grid grid-cols-5'>
               <div className='bg-gray-500 rounded-l-lg'>
@@ -43,6 +43,10 @@ function GetSampah() {
                   <h2 className='font-semibold text-xl'>Rp.{harga}</h2>
                   <h2 className='font-semibold text-md text-gray-500'>Berat : {berat} Kg</h2>
                   <h2 className='font-semibold text-md text-gray-500'>Dibuat Oleh : {user}</h2>
+                  <div className='flex space-x-3'>
+                    <h5 className='uppercase bg-slate-500 text-slate-100 px-2'>{jenis}</h5>
+                    <h5 className='uppercase bg-slate-500 text-slate-100 px-2'>{kategori}</h5>
+                  </div>
                   <TextTruncate
                         line={1}
                         element="span"
@@ -72,7 +76,9 @@ function GetSampah() {
                 <SingleProductSampah 
                     nama={d.nama_sampah} 
                     harga={d.harga.toLocaleString('en-US')} 
-                    berat={d.berat} 
+                    berat={d.berat}
+                    jenis={d.jenis_sampah}
+                    kategori={d.kategori_sampah}
                     id={d.id} 
                     deskripsi={d.deskripsi}
                     user={d.user.name}/>
@@ -104,7 +110,7 @@ function GetProduct() {
         }
     }
 
-    const SingleProduct = ({id, nama, harga, deskripsi, user}) => {
+    const SingleProduct = ({id, nama, harga, deskripsi, jenis, user}) => {
         return (
           <div className='border rounded-lg grid grid-cols-5'>
               <div className='bg-gray-500 rounded-l-lg'>
@@ -116,6 +122,9 @@ function GetProduct() {
                   <h1 className='font-semibold text-2xl'>{nama}</h1>
                   <h2 className='font-semibold text-xl'>Rp.{harga}</h2>
                   <h2 className='font-semibold text-md text-gray-500'>Dibuat Oleh : {user}</h2>
+                  <div className='flex space-x-3'>
+                    <h5 className='uppercase bg-slate-500 text-slate-100 px-2'>{jenis}</h5>
+                  </div>
                   <TextTruncate
                         line={1}
                         element="span"
@@ -145,7 +154,8 @@ function GetProduct() {
             {data.map((d) => (
                 <SingleProduct nama={d.nama_produk} 
                                 harga={d.harga.toLocaleString('en-US')} 
-                                berat={d.berat} id={d.id} 
+                                berat={d.berat} id={d.id}
+                                jenis={d.jenis_produk} 
                                 deskripsi={d.deskripsi}
                                 user={d.user.name}/>
             ))}

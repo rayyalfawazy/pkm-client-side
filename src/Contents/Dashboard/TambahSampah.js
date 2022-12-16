@@ -6,6 +6,22 @@ import axios from 'axios'
 import AuthNavbar from '../../Components/AuthNavbar'
 import { ip } from '../../Host'
 
+const jenis_sampah_list = [
+    {title:'Plastik', value:'plastik'}, 
+    {title:'Kaca', value:'kaca'}, 
+    {title:'Kertas', value:'kertas'}, 
+    {title:'Kaleng', value:'kaleng'}, 
+    {title:'Limbah Elektronik', value:'limbahelektronik'}
+]
+
+const kategori_sampah_list = [
+    {title:'Multi Layer', value:'multilayer'}, 
+    {title:'Botol', value:'botol'}, 
+    {title:'Kemasan', value:'kemasan'}, 
+    {title:'Trash Bag', value:'trashbag'}, 
+    {title:'Styrofoam', value:'styrofoam'}
+]
+
 export function CreateSampah() {
     const params = String(Object.values(useParams()))
     const [nama, setNama] = useState("");
@@ -44,7 +60,6 @@ export function CreateSampah() {
         formData.berat = Number(berat)
         formData.deskripsi = deskripsi
         try {
-            console.log(formData)
             await axios.post(`http://${ip}:5000/sampah`, formData)
             navigate('/dashboard/sampah')
         } catch (error) {
@@ -55,53 +70,57 @@ export function CreateSampah() {
     return (
         <div>
             <AuthNavbar/>
-            <form className='px-60 pt-5' onSubmit={submit}>
-                <h1>Tambah Sampah Baru</h1>
+            <form className='px-5 pt-5 lg:px-60' onSubmit={submit}>
+                <h1 className='text-center md:text-left'>Tambah Sampah Baru</h1>
                 <div className='border rounded-xl mt-5 p-3 space-y-4'>
-                    <div className='m-3 grid grid-cols-4'>
-                        <label>Product Name: </label>
-                        <input className='border-2 rounded-lg ml-5 px-2 py-2 col-span-3'
+                    <div className='space-y-2 block md:space-y-0 md:m-3 md:grid md:grid-cols-4'>
+                        <label className='block'>Product Name: </label>
+                        <input className='border-2 rounded-lg md:ml-5 px-2 py-2 col-span-3 w-full md:w-auto'
                                 type='text'
                                 value={nama}
                                 onChange={(e) => setNama(e.target.value)}/>
                     </div>
-                    <div className='m-3 grid grid-cols-4'>
-                        <label>Product Type: </label>
-                        <input className='border-2 rounded-lg ml-5 px-2 py-2 col-span-3'
-                                type='text'
-                                value={jenis}
-                                onChange={(e) => setJenis(e.target.value)}/>
+                    <div className='space-y-2 block md:space-y-0 md:m-3 md:grid md:grid-cols-4 w-full md:w-auto'>
+                        <label className='block'>Product Type: </label>
+                        <select className='border rounded-md md:ml-5 px-2 py-2 col-span-3 w-full md:w-auto' value={jenis} onChange={(e) => setJenis(e.target.value)}>
+                            <option value=""></option>
+                            {jenis_sampah_list.map((jsl) => (
+                                <option value={jsl.value}>{jsl.title}</option>
+                            ))}
+                        </select>
                     </div>
-                    <div className='m-3 grid grid-cols-4'>
-                        <label>Product Category: </label>
-                        <input className='border-2 rounded-lg ml-5 px-2 py-2 col-span-3'
-                                type='text'
-                                value={category}
-                                onChange={(e) => setCategory(e.target.value)}/>
+                    <div className='space-y-2 block md:space-y-0 md:m-3 md:grid md:grid-cols-4'>
+                        <label className='block'>Product Category: </label>
+                        <select className='border rounded-md md:ml-5 px-2 py-2 col-span-3 w-full md:w-auto' value={category} onChange={(e) => setCategory(e.target.value)}>
+                            <option value=""></option>
+                            {kategori_sampah_list.map((ksl) => (
+                                <option value={ksl.value}>{ksl.title}</option>
+                            ))}
+                        </select>
                     </div>
-                    <div className='m-3 grid grid-cols-4'>
-                        <label>Harga: </label>
-                        <input className='border-2 rounded-lg ml-5 px-2 py-2 col-span-3'
+                    <div className='space-y-2 block md:space-y-0 md:m-3 md:grid md:grid-cols-4'>
+                        <label className='block'>Harga: </label>
+                        <input className='border-2 rounded-lg md:ml-5 px-2 py-2 col-span-3 w-full md:w-auto'
                                 type='text'
                                 value={harga}
                                 onChange={(e) => setHarga(e.target.value)}/>
                     </div>
-                    <div className='m-3 grid grid-cols-4'>
-                        <label>Berat (Kg): </label>
-                        <input className='border-2 rounded-lg ml-5 px-2 py-2 col-span-3'
+                    <div className='space-y-2 block md:space-y-0 md:m-3 md:grid md:grid-cols-4'>
+                        <label className='block'>Berat (Kg): </label>
+                        <input className='border-2 rounded-lg md:ml-5 px-2 py-2 col-span-3 w-full md:w-auto'
                                 type='text'
                                 value={berat}
                                 onChange={(e) => setBerat(e.target.value)}/>
                     </div>
-                    <div className='m-3 grid grid-cols-4'>
-                        <label>Deskripsi: </label>
-                        <textarea className='border-2 rounded-lg ml-5 px-2 py-2 col-span-3'
+                    <div className='space-y-2 block md:space-y-0 md:m-3 md:grid md:grid-cols-4'>
+                        <label className='block'>Deskripsi: </label>
+                        <textarea className='border-2 rounded-lg md:ml-5 px-2 py-2 col-span-3 w-full md:w-auto'
                                 type='text'
                                 value={deskripsi}
                                 onChange={(e) => setDeskripsi(e.target.value)}/>
                     </div>
                     <button className='py-2 px-4 bg-green-500 rounded-lg text-white'
-                            type='submit'>Tambah Produk</button>
+                            type='submit'>Tambah Sampah</button>
                 </div>
             </form>
         </div>
