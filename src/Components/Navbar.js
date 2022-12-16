@@ -9,7 +9,7 @@ function Produk() {
         <h1 className='text-center m-4'><a href='/sampah'>Beli Sampah</a></h1>
       </div>
       <div className='bg-gray-300 py-5 rounded-lg'>
-        <h1 className='text-center m-4'><a href='/produk/plastik'>Beli Produk</a></h1>
+        <h1 className='text-center m-4'><a href='/produk/all'>Beli Produk</a></h1>
       </div>
     </div>
   )

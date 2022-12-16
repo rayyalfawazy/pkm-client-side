@@ -26,16 +26,9 @@ function AuthNavbar() {
   const logout = () => {
     dispatch(LogOut());
     dispatch(reset());
-    navigate('/user/login')
+    navigate('/')
   }
 
-  // const [open, makeOpen] = useState(false);
-  // const handleProdukDropdown = () => {
-  //   makeOpen(true)
-  //   if (open === true) {
-  //     makeOpen(false)
-  //   }
-  // }
   return (
     <div className='sticky top-0'>
       <div className='border-b-2 border-red-600 px-60 py-5 flex justify-between bg-white'>

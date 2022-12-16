@@ -32,7 +32,11 @@ function GetSampah() {
     const SingleProductSampah = ({id, nama, harga, berat, deskripsi, user}) => {
         return (
           <div className='border rounded-lg grid grid-cols-5'>
-              <div className='bg-gray-500 rounded-l-lg'></div>
+              <div className='bg-gray-500 rounded-l-lg'>
+                <img src='https://rare-gallery.com/thumbs/862283-Ferrari-Scuderia-Italia-Forza-Horizon-4-Front-Red.jpg'
+                    alt='image'
+                    className='object-cover h-64 w-96 object-center rounded-l-lg'/>
+              </div>
               <div className='m-5 col-span-4 space-y-3'>
                   <h1 className='font-semibold text-2xl'>{nama}</h1>
                   <h2 className='font-semibold text-xl'>Rp.{harga}</h2>
@@ -99,13 +103,18 @@ function GetProduct() {
         }
     }
 
-    const SingleProduct = ({id, nama, harga, deskripsi}) => {
+    const SingleProduct = ({id, nama, harga, deskripsi, user}) => {
         return (
           <div className='border rounded-lg grid grid-cols-5'>
-              <div className='bg-gray-500 rounded-l-lg'></div>
+              <div className='bg-gray-500 rounded-l-lg'>
+                <img src='https://rare-gallery.com/thumbs/862283-Ferrari-Scuderia-Italia-Forza-Horizon-4-Front-Red.jpg'
+                    alt='image'
+                    className='object-cover h-52 w-96 object-center rounded-l-lg'/>
+              </div>
               <div className='m-5 col-span-4 space-y-3'>
                   <h1 className='font-semibold text-2xl'>{nama}</h1>
                   <h2 className='font-semibold text-xl'>Rp.{harga}</h2>
+                  <h2 className='font-semibold text-md text-gray-500'>Dibuat Oleh : {user}</h2>
                   <TextTruncate
                         line={1}
                         element="span"
@@ -133,17 +142,22 @@ function GetProduct() {
     return (
         <div  className='space-y-3'>
             {data.map((d) => (
-                <SingleProduct nama={d.nama_produk} harga={d.harga.toLocaleString('en-US')} berat={d.berat} id={d.id} deskripsi={d.deskripsi}/>
+                <SingleProduct nama={d.nama_produk} 
+                                harga={d.harga.toLocaleString('en-US')} 
+                                berat={d.berat} id={d.id} 
+                                deskripsi={d.deskripsi}
+                                user={d.user.name}/>
             ))}
         </div>
     )
 }
 
 function Dashboard() {
+    const [authName, setAuthName] = useState()
     const params = String(Object.values(useParams()))
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const {isError} = useSelector((state) => state.auth)
+    const {isError, user} = useSelector((state) => state.auth)
 
     useEffect(()=>{
         dispatch(getMe())
@@ -153,7 +167,12 @@ function Dashboard() {
         if (isError) {
             navigate('/user/login')
         }
-    },[isError, navigate])
+        getAuth()
+    },[isError, navigate, user])
+
+    const getAuth = async () => {
+        console.log(user)
+    }
 
     return (
         <div>
@@ -175,7 +194,7 @@ function Dashboard() {
                     </div>
                 </div>
                 <div className=' col-span-4 pt-5 pb-16 pl-10'>
-                    <AuthInformation name="Just a Prop" role="Just a Prop"/>
+                    {user === null ? <p>Loading</p> : <AuthInformation name={user.name} role={user.role}/>}
                     <div className='flex justify-between mr-60'>
                         <h1 className='text-2xl font-semibold'>Halaman Dashboard { params === 'sampah' ? "Produk Sampah" : "Produk Kerajinan" } </h1>
                         <a className='bg-green-600 text-white p-3 rounded-lg hover:bg-green-500 duration-150' href={`/dashboard/${params}/create`}>Tambah { params === 'sampah' ? "Sampah" : "Produk"}</a>

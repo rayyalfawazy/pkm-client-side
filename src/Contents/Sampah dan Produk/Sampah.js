@@ -58,7 +58,7 @@ const FilterCategory = () => {
 }
 
 
-const SingleProduct = ({nama, harga, berat, deskripsi, jenis, kategori}) => {
+const SingleProduct = ({nama, harga, berat, deskripsi, jenis, kategori, user}) => {
   return (
     <div className='border rounded-lg grid grid-cols-5'>
         <div className='bg-gray-500 rounded-l-lg'></div>
@@ -86,7 +86,7 @@ function Sampah() {
     const jenisSampah = Object.values(useParams())
     const [dataSampah, setDataSampah] = useState(null)
     useEffect(() => {
-        fetch('http://localhost:5000/sampah')
+        fetch('http://localhost:5000/home/sampah')
         .then((response) => response.json())
         .then((json) => setDataSampah(json))
     }, []);
@@ -105,7 +105,7 @@ function Sampah() {
                 <title>Title | Sampah</title>
             </Helmet>
             <Navbar/>
-            <form className='mx-60 mt-5 sticky top-24'>   
+            {/* <form className='mx-60 mt-5 sticky top-24'>   
                 <label htmlFor="default-search" className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
                 <div className="relative">
                     <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -114,7 +114,7 @@ function Sampah() {
                     <input type="search" id="default-search" className="block w-full p-4 pl-10 text-sm text-gray-900 border rounded-lg bg-gray-200 drop-shadow-xl hover:drop-shadow-md duration-150" placeholder="Cari Barang disini..." required/>
                     <button type="submit" className="text-white absolute right-2.5 bottom-2.5 bg-green-700 font-medium rounded-lg text-sm px-4 py-2">Search</button>
                 </div>
-            </form>
+            </form> */}
             <section className='px-60 mt-10 flex space-x-5'>
                 <aside>
                     <FilterJenisSampah />

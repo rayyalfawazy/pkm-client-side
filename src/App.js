@@ -1,8 +1,25 @@
 import Navbar from './Components/Navbar';
 import { Helmet } from 'react-helmet'
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { getMe } from './Feature/AuthSlice';
 
 function App() {
   const images = 'https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80'
+  const {isSuccess} = useSelector((state) => state.auth)
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  useEffect(()=>{
+    dispatch(getMe())
+  },[dispatch])
+
+  useEffect(()=>{
+    if (isSuccess) {
+        navigate('/dashboard/sampah')
+    }
+},[isSuccess, navigate])
   return (
     <div>
       <Helmet>
