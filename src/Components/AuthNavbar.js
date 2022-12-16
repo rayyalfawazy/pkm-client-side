@@ -26,7 +26,7 @@ function AuthNavbar() {
   const logout = () => {
     dispatch(LogOut());
     dispatch(reset());
-    navigate('/')
+    navigate('/user/login')
   }
 
   return (
