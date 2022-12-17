@@ -29,7 +29,7 @@ function Login() {
     <div className='bg-gray-200 h-screen'>
         <Navbar/>
         <div className='px-5 md:px-60 mt-5 md:mt-44'>
-            <form className='border mx-2 md:mx-5 lg:mx-[400px] p-5 bg-white drop-shadow-lg' onSubmit={Auth}>
+            <form className='border mx-2 md:mx-5 lg:mx-[400px] p-5 bg-white shadow-2xl' onSubmit={Auth}>
                 <h1 className='text-center font-semibold text-3xl'>Login</h1>
                 <hr className='mt-5'/>
                 <div className='mt-5'>

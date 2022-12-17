@@ -78,7 +78,7 @@ const SingleProduct = ({nama, harga, berat, deskripsi, jenis, kategori, user}) =
         <div className='bg-gray-500 rounded-t-lg md:rounded-tr-none md:rounded-l-lg'>
             <img src='https://rare-gallery.com/thumbs/862283-Ferrari-Scuderia-Italia-Forza-Horizon-4-Front-Red.jpg'
                     alt='image'
-                    className='object-contain h-60 w-96 object-center rounded-l-lg'/>
+                    className='object-cover h-60 w-96 object-center rounded-l-lg'/>
         </div>
         <div className='m-5 col-span-4 space-y-3'>
             <h1 className='font-semibold text-2xl'>{nama}</h1>
