@@ -29,19 +29,19 @@ function App() {
       <div>
         <img className='w-full object-none object-bottom h-[870px]' src={images} alt='images'/>
       </div>
-      <section className='mt-20 mb-20 mx-60'>
+      <section className='mt-20 mb-20 mx-5 lg:mx-60'>
         <div>
           <h1 className='mb-10 text-2xl font-bold uppercase text-center'>Brand</h1>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ullamcorper porta semper. Quisque ultrices nulla quam. Mauris mauris leo, viverra vel suscipit varius, porta ullamcorper quam. Aenean blandit neque in mi molestie, vitae dignissim odio posuere. Ut sed urna quis neque tristique ornare ullamcorper vitae orci.</p>
         </div>
         <div className='mt-32'>
-          <ul className='grid grid-row-1 grid-cols-3 gap-10'>
+          <ul className='lg:grid lg:grid-row-1 lg:grid-cols-3 md:gap-10'>
+            <li className='col-span-2 row-span-2'>
+              <img src={images} alt='images' className='rounded-lg object-cover h-64 w-full'/>
+            </li>
             <li>
               <h1 className='font-bold text-4xl mb-5'>Lorem Ipsum</h1>
               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nibh ante, semper quis metus vel, efficitur mollis dolor.</p>
-            </li>
-            <li className='col-span-2 row-span-2'>
-              <img src={images} alt='images' className='rounded-lg object-cover h-64 w-full'/>
             </li>
             <li>
               <h1 className='font-bold text-4xl mb-5'>Lorem Ipsum</h1>
@@ -62,19 +62,19 @@ function App() {
             </li>
           </ul>
         </div>
-        <div className='mt-32'>
+        {/* <div className='mt-32'>
           <h1 className='mb-10 text-2xl font-bold text-center'>Mengapa Pilih Brand?</h1>
-          <ul className='grid grid-cols-3 gap-10'>
-            <li className='p-48 shadow-md hover:shadow-2xl duration-100'>Item</li>
-            <li className='p-48 shadow-md hover:shadow-2xl duration-100'>Item</li>
-            <li className='p-48 shadow-md hover:shadow-2xl duration-100'>Item</li>
-            <li className='p-48 shadow-md hover:shadow-2xl duration-100'>Item</li>
-            <li className='p-48 shadow-md hover:shadow-2xl duration-100'>Item</li>
-            <li className='p-48 shadow-md hover:shadow-2xl duration-100'>Item</li>
+          <ul className='2xl:grid 2xl:grid-cols-3 2xl:gap-10 2xl:space-y-0 space-y-5'>
+            <li className='p-48 shadow-md hover:shadow-2xl duration-100 text-center'>Item</li>
+            <li className='p-48 shadow-md hover:shadow-2xl duration-100 text-center'>Item</li>
+            <li className='p-48 shadow-md hover:shadow-2xl duration-100 text-center'>Item</li>
+            <li className='p-48 shadow-md hover:shadow-2xl duration-100 text-center'>Item</li>
+            <li className='p-48 shadow-md hover:shadow-2xl duration-100 text-center'>Item</li>
+            <li className='p-48 shadow-md hover:shadow-2xl duration-100 text-center'>Item</li>
           </ul>
-        </div>
+        </div> */}
       </section>
-      <footer className='bg-gray-500 py-16 px-60'>
+      <footer className='bg-gray-500 py-16 lg:px-60 px-5'>
         <p className='text-white'>©Brand 2022 - All rights reserved</p>
         <p className='text-white'>Institut Teknologi Indonesia.</p>
       </footer>

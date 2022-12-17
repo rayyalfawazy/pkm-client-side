@@ -28,8 +28,8 @@ function Login() {
   return (
     <div className='bg-gray-200 h-screen'>
         <Navbar/>
-        <div className='px-60 mt-28'>
-            <form className='border mx-[500px] p-5 bg-white drop-shadow-lg' onSubmit={Auth}>
+        <div className='px-5 md:px-60 mt-5 md:mt-44'>
+            <form className='border mx-2 md:mx-5 lg:mx-[400px] p-5 bg-white drop-shadow-lg' onSubmit={Auth}>
                 <h1 className='text-center font-semibold text-3xl'>Login</h1>
                 <hr className='mt-5'/>
                 <div className='mt-5'>
@@ -56,6 +56,11 @@ function Login() {
                     />
                 </div>
                 <div className='mt-7'>
+                    <p><a className='text-blue-700 hover:text-blue-500' href='/user/register'>Belum memiliki akun? Silahkan Register</a></p>
+                    <p><a className='text-blue-700 hover:text-blue-500' href='/'>Butuh Bantuan?</a></p>
+                    
+                </div>
+                <div className='mt-3'>
                     <button type='submit' className='bg-green-600 text-white px-3 py-2'>
                         {isLoading ? 'Loading...' : "Log In"}
                     </button>

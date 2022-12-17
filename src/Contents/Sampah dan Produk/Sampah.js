@@ -2,7 +2,7 @@ import { useState,useEffect } from 'react'
 import Navbar from '../../Components/Navbar'
 import { Helmet } from 'react-helmet'
 import { BsBagDashFill, BsSearch } from 'react-icons/bs'
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import TextTruncate from 'react-text-truncate'
 import { ip } from '../../Host';
 
@@ -21,48 +21,65 @@ const category = [{title:'Multi Layer', routeRequest:'multilayer'},
 
 const FilterJenisSampah = () => {
     const params = String(Object.values(useParams()))
+    const navigate = useNavigate()
     return (
         <div>
-                            {jenisSampah.map((jnsp) => (
+            {/* Tablet-Desktop */}
+            <div className='hidden lg:inline'>
+                {jenisSampah.map((jnsp) => (
                         params === jnsp.routeRequest ?
                         <h2 className='font-semibold text-xl ml-2 pr-28 pb-3'>{jnsp.title}</h2>
                         :
                         ""
                     ))}
-            <div className=' mt-3 pl-2 py-3 shadow-md pr-28'>
-                <h1 className='font-semibold text-xl mx-2 border-b pb-3'>Jenis Sampah</h1>
-                <ul className='mx-2 space-y-2 mt-2'>
+                <div className='mt-3 pl-2 py-3 shadow-md pr-28'>
+                    <h2 className='font-semibold text-xl ml-2 pr-28 border-b-2 pb-3'>Jenis Produk</h2>
+                    <ul className='mx-2 space-y-2 mt-2'>
+                        {jenisSampah.map((jnsp) => (
+                            <li><a className={params === jnsp.routeRequest ? 'text-red-600 border-l-8 border-red-400' : 'hover:text-red-400 hover:border-red-400 hover:border-l-4 duration-150'} href={`/produk/${jnsp.routeRequest}`}>{jnsp.title}</a></li>
+                        ))}
+                    </ul>
+                </div>
+            </div>
+            {/* HP */}
+            <div className='inline lg:hidden'>
+                <label>Filter : </label>
+                <select className='p-3 mb-5' onChange={(e) => navigate(`/produk/${e.target.value}`)}>
                     {jenisSampah.map((jnsp) => (
-                        <li><a className={params === jnsp.routeRequest ? 'text-red-600 border-l-8 border-red-400' : 'hover:text-red-400 hover:border-red-400 hover:border-l-4 duration-150'} href={`/sampah/${jnsp.routeRequest}`}>{jnsp.title}</a></li>
-                    ))}
-                </ul>
+                            <option value={jnsp.routeRequest}>{jnsp.title}</option>
+                        ))}
+                </select>
             </div>
         </div>
     );
 }
 
-const FilterCategory = () => {
-    return (
-        <div>
-            <div className=' mt-3 pl-2 pr-5 py-3 shadow-md'>
-                <h1 className='font-semibold text-xl mx-2 border-b pb-3'>Kategori - (Kategori)</h1>
-                <ul className='mx-2 space-y-2 mt-2'>
-                    {jenisSampah.map((jnsp) => (
-                        category.map((c) => (
-                            <li><a href={`/sampah/${jnsp.route}?category=${c.routeRequest}`}>{c.title}</a></li>
-                        ))
-                    ))}
-                </ul>
-            </div>
-        </div>
-    );
-}
+// const FilterCategory = () => {
+//     return (
+//         <div>
+//             <div className=' mt-3 pl-2 pr-5 py-3 shadow-md'>
+//                 <h1 className='font-semibold text-xl mx-2 border-b pb-3'>Kategori - (Kategori)</h1>
+//                 <ul className='mx-2 space-y-2 mt-2'>
+//                     {jenisSampah.map((jnsp) => (
+//                         category.map((c) => (
+//                             <li><a href={`/sampah/${jnsp.route}?category=${c.routeRequest}`}>{c.title}</a></li>
+//                         ))
+//                     ))}
+//                 </ul>
+//             </div>
+//         </div>
+//     );
+// }
 
 
 const SingleProduct = ({nama, harga, berat, deskripsi, jenis, kategori, user}) => {
   return (
-    <div className='border rounded-lg grid grid-cols-5'>
-        <div className='bg-gray-500 rounded-l-lg'></div>
+    <div className='border rounded-lg md:grid md:grid-cols-5'>
+        <div className='bg-gray-500 rounded-t-lg md:rounded-tr-none md:rounded-l-lg'>
+            <img src='https://rare-gallery.com/thumbs/862283-Ferrari-Scuderia-Italia-Forza-Horizon-4-Front-Red.jpg'
+                    alt='image'
+                    className='object-contain h-60 w-96 object-center rounded-l-lg'/>
+        </div>
         <div className='m-5 col-span-4 space-y-3'>
             <h1 className='font-semibold text-2xl'>{nama}</h1>
             <h2 className='font-semibold text-xl'>Rp.{harga.toLocaleString('en-US')}</h2>
@@ -120,7 +137,7 @@ function Sampah() {
                     <button type="submit" className="text-white absolute right-2.5 bottom-2.5 bg-green-700 font-medium rounded-lg text-sm px-4 py-2">Search</button>
                 </div>
             </form> */}
-            <section className='px-60 mt-10 flex space-x-5'>
+            <section className='px-5 lg:px-60 mt-10 lg:flex lg:space-x-5'>
                 <aside>
                     <FilterJenisSampah />
                 </aside>

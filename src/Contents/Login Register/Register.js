@@ -36,8 +36,8 @@ function Register() {
     return (
         <div className='bg-gray-200 h-screen'>
             <Navbar/>
-            <div className='px-60 mt-28'>
-                <form className='border mx-[500px] p-5 bg-white drop-shadow-lg' onSubmit={submit}>
+            <div className='px-5 md:px-60 mt-5 md:mt-44'>
+                <form className='border mx-2 md:mx-5 lg:mx-[400px] p-5 bg-white drop-shadow-lg' onSubmit={submit}>
                     <h1 className='text-center font-semibold text-3xl'>Register</h1>
                     <hr className='mt-5'/>
                     <div className='mt-5'>
@@ -82,6 +82,10 @@ function Register() {
                         {confPassword !== password ? <p className='font-light text-red-600 text-md'>Password tidak sama</p> : ""}
                     </div>
                     <div className='mt-7'>
+                        <a className='text-blue-700 hover:text-blue-500' href='/user/login'>Sudah memiliki akun? Silahkan Login</a>
+                        
+                    </div>
+                    <div className='mt-3'>
                         <button className='bg-green-600 text-white px-3 py-2'>Register</button>
                     </div>
                 </form>

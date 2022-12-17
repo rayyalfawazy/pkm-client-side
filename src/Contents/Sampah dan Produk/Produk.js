@@ -5,6 +5,20 @@ import { BsBagDashFill, BsSearch } from 'react-icons/bs'
 import { Navigate, useParams, useNavigate } from 'react-router-dom';
 import TextTruncate from 'react-text-truncate'
 import { ip } from '../../Host';
+import {
+    Menu,
+    MenuButton,
+    MenuList,
+    MenuItem,
+    MenuItemOption,
+    MenuGroup,
+    MenuOptionGroup,
+    MenuDivider,
+    Button,
+    IconButton
+  } from '@chakra-ui/react'
+  
+import { ChevronDownIcon, HamburgerIcon } from '@chakra-ui/icons'
 
 const jenisSampah = [{title:'All', routeRequest:'all'},
                     {title:'Plastik', routeRequest:'plastik'}, 
@@ -16,21 +30,34 @@ const jenisSampah = [{title:'All', routeRequest:'all'},
 
 const FilterJenisSampah = () => {
     const params = String(Object.values(useParams()))
+    const navigate = useNavigate()
     return (
         <div>
-            {jenisSampah.map((jnsp) => (
-                    params === jnsp.routeRequest ?
-                    <h2 className='font-semibold text-xl ml-2 pr-28 pb-3'>{jnsp.title}</h2>
-                    :
-                    ""
-                ))}
-            <div className='mt-3 pl-2 py-3 shadow-md pr-28'>
-                <h2 className='font-semibold text-xl ml-2 pr-28 border-b-2 pb-3'>Jenis Produk</h2>
-                <ul className='mx-2 space-y-2 mt-2'>
-                    {jenisSampah.map((jnsp) => (
-                        <li><a className={params === jnsp.routeRequest ? 'text-red-600 border-l-8 border-red-400' : 'hover:text-red-400 hover:border-red-400 hover:border-l-4 duration-150'} href={`/produk/${jnsp.routeRequest}`}>{jnsp.title}</a></li>
+            {/* Tablet-Desktop */}
+            <div className='hidden lg:inline'>
+                {jenisSampah.map((jnsp) => (
+                        params === jnsp.routeRequest ?
+                        <h2 className='font-semibold text-xl ml-2 pr-28 pb-3'>{jnsp.title}</h2>
+                        :
+                        ""
                     ))}
-                </ul>
+                <div className='mt-3 pl-2 py-3 shadow-md pr-28'>
+                    <h2 className='font-semibold text-xl ml-2 pr-28 border-b-2 pb-3'>Jenis Produk</h2>
+                    <ul className='mx-2 space-y-2 mt-2'>
+                        {jenisSampah.map((jnsp) => (
+                            <li><a className={params === jnsp.routeRequest ? 'text-red-600 border-l-8 border-red-400' : 'hover:text-red-400 hover:border-red-400 hover:border-l-4 duration-150'} href={`/produk/${jnsp.routeRequest}`}>{jnsp.title}</a></li>
+                        ))}
+                    </ul>
+                </div>
+            </div>
+            {/* HP */}
+            <div className='inline lg:hidden'>
+                <label>Filter : </label>
+                <select className='p-3 mb-5' onChange={(e) => navigate(`/produk/${e.target.value}`)}>
+                    {jenisSampah.map((jnsp) => (
+                            <option value={jnsp.routeRequest}>{jnsp.title}</option>
+                        ))}
+                </select>
             </div>
         </div>
     );
@@ -39,11 +66,11 @@ const FilterJenisSampah = () => {
 
 const SingleProduct = ({nama, harga, deskripsi, jenis, user}) => {
   return (
-    <div className='border rounded-lg grid grid-cols-5'>
-        <div className='bg-gray-500 rounded-l-lg'>
-        <img src='https://rare-gallery.com/thumbs/862283-Ferrari-Scuderia-Italia-Forza-Horizon-4-Front-Red.jpg'
-            alt='image'
-            className='object-contain h-60 w-96 object-center rounded-l-lg'/>
+    <div className='border rounded-lg md:grid md:grid-cols-5'>
+        <div className='bg-gray-500 rounded-t-lg md:rounded-tr-none md:rounded-l-lg'>
+            <img src='https://rare-gallery.com/thumbs/862283-Ferrari-Scuderia-Italia-Forza-Horizon-4-Front-Red.jpg'
+                alt='image'
+                className='object-contain h-60 w-96 object-center rounded-l-lg'/>
         </div>
         <div className='m-5 col-span-4 space-y-3'>
             <h1 className='font-semibold text-2xl'>{nama}</h1>
@@ -53,7 +80,7 @@ const SingleProduct = ({nama, harga, deskripsi, jenis, user}) => {
                 <h5 className='uppercase bg-slate-500 text-slate-100 px-2'>{jenis}</h5>
             </div>
             <TextTruncate
-                line={1}
+                line={50}
                 element="span"
                 truncateText="…"
                 text={`${deskripsi}.`}
@@ -101,7 +128,7 @@ function Produk() {
                     <button type="submit" className="text-white absolute right-2.5 bottom-2.5 bg-green-700 font-medium rounded-lg text-sm px-4 py-2">Search</button>
                 </div>
             </form> */}
-            <section className='px-60 mt-10 flex space-x-5'>
+            <section className='px-5 lg:px-60 mt-10 lg:flex lg:space-x-5'>
                 <aside>
                     <FilterJenisSampah />
                 </aside>
