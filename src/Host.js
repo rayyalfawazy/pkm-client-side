@@ -1,3 +1,3 @@
-export const ip = '192.168.100.4';
+export const ip = 'localhost';
 
 // USE PUBLIC IP (255.255.255.0)

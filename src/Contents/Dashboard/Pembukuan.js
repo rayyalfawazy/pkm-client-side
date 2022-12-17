@@ -28,6 +28,10 @@ export default function Pembukuan() {
         }
     },[isError, navigate, user])
 
+    useEffect(()=>{
+        console.log(user)
+    },[user])
+
     const fetchData = async(e) => {
         const response = await axios.get(`http://${ip}:5000/pembukuan/filter?search=${querySearch}`)
         setPembukuan(response.data)
@@ -94,7 +98,7 @@ export default function Pembukuan() {
                         {pembukuan.map((pmb, i) => (
                             <tr>
                                 <td className='border border-slate-300 px-3 bg-slate-100'>{i+1}</td>
-                                <td className='border border-slate-300 px-3 bg-slate-100'>{pmb.nama_member}</td>
+                                <td className='border border-slate-300 px-3 bg-slate-100'>{pmb.user.name}</td>
                                 <td className='border border-slate-300 px-3 bg-slate-100'>{pmb.tanggal_penjualan}</td>
                                 <td className='border border-slate-300 px-3 bg-slate-100 capitalize'>{pmb.jenis_sampah}</td>
                                 <td className='border border-slate-300 px-3 bg-slate-100 capitalize'>{pmb.kategori_penjualan}</td>

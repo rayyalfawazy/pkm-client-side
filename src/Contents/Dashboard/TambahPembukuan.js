@@ -1,8 +1,11 @@
+import { useEffect } from 'react'
 import Navbar from '../../Components/Navbar'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useState, Component } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import axios from 'axios'
 import { ip } from '../../Host'
+import { getMe } from '../../Feature/AuthSlice'
 
 const kategori_penjualan_list = [
     {title:'Sampah', value:'sampah'},
@@ -19,6 +22,7 @@ const jenis_sampah_list = [
 
 export function CreatePembukuan() {
     const params = String(Object.values(useParams()))
+    const [daftarMember, setDaftarMember] = useState(null);
     const [namaMember, setNamaMember] = useState("");
     const [tanggal, setTanggal] = useState("");
     const [kategoriPenjualan, setKategoriPenjualan] = useState("");
@@ -26,15 +30,39 @@ export function CreatePembukuan() {
     const [totalPenjualan, setTotalPenjualan] = useState("");
     const navigate = useNavigate();
 
+    const dispatch = useDispatch();
+    const {isError} = useSelector((state => state.auth))
+
+
+
+    const getMember = async () => {
+        const response = await axios.get(`http://${ip}:5000/users`)
+        setDaftarMember(response.data)
+    }
+
+    useEffect(()=>{
+        getMember()
+    },[])
+
+    useEffect(()=>{
+        dispatch(getMe())
+    },[dispatch])
+
+    useEffect(()=>{
+        if (isError) {
+            navigate('/user/login')
+        }
+    },[isError, navigate])
+
     const submit = async (e) => {
         e.preventDefault();
-        let formData = {"nama_member":null, 
+        let formData = {"userId":null, 
                         'tanggal_penjualan': null,
                         'total_penjualan':null,
                         'kategori_penjualan':null,
                         'jenis_sampah':null,
                     };
-        formData.nama_member = namaMember
+        formData.userId = namaMember
         formData.tanggal_penjualan = tanggal
         formData.total_penjualan = Number(totalPenjualan)
         formData.kategori_penjualan = kategoriPenjualan
@@ -47,6 +75,12 @@ export function CreatePembukuan() {
             console.log(error)
         }
     }
+
+    if (daftarMember === null) {
+        return (
+            <div>Loading</div>
+        )
+    }
     
     return (
         <div>
@@ -56,10 +90,12 @@ export function CreatePembukuan() {
                 <div className='border rounded-xl mt-5 p-3 space-y-4'>
                     <div className='m-3 grid grid-cols-4'>
                         <label>Member Name</label>
-                        <input className='border rounded-md ml-5 px-2 py-2 col-span-3'
-                                type='text'
-                                value={namaMember}
-                                onChange={(e) => setNamaMember(e.target.value)}/>
+                        <select className='border rounded-md md:ml-5 px-2 py-2 col-span-3 w-full md:w-auto' value={namaMember} onChange={(e) => setNamaMember(e.target.value)}>
+                            <option value=''>Pilih Member</option>
+                            {daftarMember.filter((ksl) => ksl.role === "member").map((ksl) => (
+                                <option value={ksl.id}>{ksl.name}</option>
+                            ))}
+                        </select>
                     </div>
                     <div className='m-3 grid grid-cols-4'>
                         <label>Tanggal Penjualan</label>
@@ -78,6 +114,7 @@ export function CreatePembukuan() {
                     <div className='m-3 grid grid-cols-4'>
                         <label>Kategori Penjualan</label>
                         <select className='border rounded-md ml-5 px-2 py-2 col-span-3' value={kategoriPenjualan} onChange={(e) => setKategoriPenjualan(e.target.value)} >
+                        <option value=''>Pilih Jenis Penjualan</option>
                             {kategori_penjualan_list.map((kpl) => (
                                 <option value={kpl.value}>{kpl.title}</option>
                             ))}
@@ -85,7 +122,8 @@ export function CreatePembukuan() {
                     </div>
                     <div className='m-3 grid grid-cols-4'>
                         <label>Jenis Sampah</label>
-                        <select className='border rounded-md ml-5 px-2 py-2 col-span-3' value={jenis} onChange={(e) => setKategoriPenjualan(e.target.value)} >
+                        <select className='border rounded-md ml-5 px-2 py-2 col-span-3' value={jenis} onChange={(e) => setJenis(e.target.value)} >
+                        <option value=''>Pilih Jenis Sampah</option>
                             {jenis_sampah_list.map((jsl) => (
                                 <option value={jsl.value}>{jsl.title}</option>
                             ))}

@@ -30,6 +30,7 @@ export const Router = () => (
       <Route path='/dashboard/sampah/edit/:id' element={<EditSampah/>} exact/>
       <Route path='/dashboard/sampah/create' element={<CreateSampah/>} exact/>
       <Route path='/dashboard/pembukuan' element={<Pembukuan/>} exact/>
+      <Route path='/dashboard/pembukuan/create' element={<CreatePembukuan/>} exact/>
 
       {/* User Handling Routes */}
       <Route path='/user/login' element={<Login/>}/>
