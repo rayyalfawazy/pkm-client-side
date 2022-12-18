@@ -1,4 +1,3 @@
-import Navbar from '../../Components/Navbar'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useState, Component, useEffect } from 'react'
 import AuthNavbar from '../../Components/AuthNavbar'
@@ -22,6 +21,7 @@ const jenis_sampah_list = [
 
 export function EditPembukuan() {
     const id = String(Object.values(useParams()))
+    const [daftarMember, setDaftarMember] = useState(null);
     const [namaMember, setNamaMember] = useState("");
     const [tanggal, setTanggal] = useState("");
     const [kategoriPenjualan, setKategoriPenjualan] = useState("");
@@ -33,6 +33,11 @@ export function EditPembukuan() {
     const {isError} = useSelector((state => state.auth))
 
     useEffect(()=>{
+        getPembukuanById()
+        getMember()
+    },[])
+
+    useEffect(()=>{
         dispatch(getMe())
     },[dispatch])
 
@@ -42,9 +47,14 @@ export function EditPembukuan() {
         }
     },[isError, navigate])
 
-    const getProductById = async () => {
+    const getMember = async () => {
+        const response = await axios.get(`http://${ip}:5000/users`)
+        setDaftarMember(response.data)
+    }
+
+    const getPembukuanById = async () => {
         const response = await axios.get(`http://${ip}:5000/pembukuan/${id}`)
-        setNamaMember(response.data.nama_member)
+        setNamaMember(response.data.userId)
         setTanggal(response.data.tanggal_penjualan)
         setTotalPenjualan(response.data.total_penjualan)
         setKategoriPenjualan(response.data.kategori_penjualan)
@@ -72,6 +82,12 @@ export function EditPembukuan() {
             console.log(error)
         }
     }
+
+    if (daftarMember === null) {
+        return (
+            <div>Loading</div>
+        )
+    }
     
     return (
         <div>
@@ -80,11 +96,13 @@ export function EditPembukuan() {
                 <h1>Edit Sampah</h1>
                 <div className='border rounded-xl mt-5 p-3 space-y-4'>
                     <div className='m-3 grid grid-cols-4'>
-                        <label>Member Name: </label>
-                        <input className='border-2 rounded-lg ml-5 px-2 py-2 col-span-3'
-                                type='text'
-                                value={namaMember}
-                                onChange={(e) => setNamaMember(e.target.value)}/>
+                        <label>Member Name</label>
+                        <select className='border rounded-md md:ml-5 px-2 py-2 col-span-3 w-full md:w-auto' value={namaMember} onChange={(e) => setNamaMember(e.target.value)}>
+                            <option value=''>Pilih Member</option>
+                            {daftarMember.filter((ksl) => ksl.role === "member").map((ksl) => (
+                                <option value={ksl.id}>{ksl.name}</option>
+                            ))}
+                        </select>
                     </div>
                     <div className='m-3 grid grid-cols-4'>
                         <label>Tanggal Penjualan</label>

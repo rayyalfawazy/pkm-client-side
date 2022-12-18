@@ -13,6 +13,9 @@ function GetSampah() {
     const [data, setData] = useState(null)
     const navigate = useNavigate()
 
+    const dispatch = useDispatch();
+    const {isError, user} = useSelector((state) => state.auth)
+
     useEffect(() => {
         getData()
     }, []);
@@ -30,7 +33,17 @@ function GetSampah() {
         }
     }
 
-    const SingleProductSampah = ({id, nama, harga, berat, jenis, kategori,  deskripsi, user}) => {
+    useEffect(()=>{
+        dispatch(getMe())
+    },[dispatch])
+
+    useEffect(()=>{
+        if (isError) {
+            navigate('/user/login')
+        }
+    },[isError, navigate, user])
+
+    const SingleProductSampah = ({id, nama, harga, berat, jenis, kategori,  deskripsi, user, editable}) => {
         return (
           <div className='border rounded-lg md:grid md:grid-cols-5'>
               <div className='bg-gray-500 rounded-l-lg rounded-t-lg md:rounded-tr-none md:rounded-l-lg'>
@@ -54,10 +67,13 @@ function GetSampah() {
                         text={`${deskripsi}.`}
                         textTruncateChild={<a href="#"></a>}
                     />
-                  <div className='space-x-3'>
-                    <a className='bg-blue-600 text-white p-3 rounded-lg hover:bg-blue-500 duration-150' href={`/dashboard/sampah/edit/${id}`}>Edit Produk</a>
-                    <a onClick={() => delData(id)} className='bg-red-600 text-white p-3 rounded-lg hover:bg-red-500 duration-150' href='/dashboard/sampah'>Hapus Produk</a>
-                  </div>
+                    {editable ? 
+                        <div className='space-x-3'>
+                            <a className='bg-blue-600 text-white p-3 rounded-lg hover:bg-blue-500 duration-150' href={`/dashboard/sampah/edit/${id}`}>Edit Produk</a>
+                            <a onClick={() => delData(id)} className='bg-red-600 text-white p-3 rounded-lg hover:bg-red-500 duration-150' href='/dashboard/sampah'>Hapus Produk</a>
+                        </div>
+                    : ""}
+
               </div>
           </div>
         )
@@ -81,7 +97,8 @@ function GetSampah() {
                     kategori={d.kategori_sampah}
                     id={d.id} 
                     deskripsi={d.deskripsi}
-                    user={d.user.name}/>
+                    user={d.user.name}
+                    editable={user.role === "admin" || user.role ==="member" ? true : false}/>
             ))}
         </div>
     )
@@ -164,7 +181,6 @@ function GetProduct() {
 }
 
 function Dashboard() {
-    const [authName, setAuthName] = useState()
     const params = String(Object.values(useParams()))
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -179,6 +195,12 @@ function Dashboard() {
             navigate('/user/login')
         }
     },[isError, navigate, user])
+    
+    if (user === null) {
+        return (
+            <p className='text-center mt-5'>Loading Autentication...</p>
+        )
+    }
 
     return (
         <div>
@@ -207,10 +229,13 @@ function Dashboard() {
                     </div>
                 </div>
                 <div className='md:col-span-4 pt-5 pb-16 pl-5 md:pl-10'>
-                    {user === null ? <p>Loading</p> : <AuthInformation name={user.name} role={user.role}/>}
+                    <AuthInformation name={user.name} role={user.role}/>
                     <div className='md:flex md:justify-between md:mr-60'>
                         <h1 className='text-2xl font-semibold md:mb-0 mb-4'>Halaman Dashboard { params === 'sampah' ? "Produk Sampah" : "Produk Kerajinan" } </h1>
-                        <a className='bg-green-600 text-white p-3 rounded-lg hover:bg-green-500 duration-150' href={`/dashboard/${params}/create`}>Tambah { params === 'sampah' ? "Sampah" : "Produk"}</a>
+                        {user.role === "member" || user.role === "admin" ?
+                            <a className='bg-green-600 text-white p-3 rounded-lg hover:bg-green-500 duration-150' href={`/dashboard/${params}/create`}>Tambah { params === 'sampah' ? "Sampah" : "Produk"}</a>
+                        : ""}
+                        
                     </div>
                     <div className='md:mr-60 mr-5 mt-5 space-y-3'>
                         { params === 'sampah' ? <GetSampah/> : <GetProduct/>}

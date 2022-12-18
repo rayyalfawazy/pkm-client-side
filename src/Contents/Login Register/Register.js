@@ -19,7 +19,7 @@ function Register() {
                         'email': null,
                         'password':null,
                         'confPassword':null,
-                        "role":"member"
+                        "role":"user"
                     };
         formData.name = fullname
         formData.email = email
