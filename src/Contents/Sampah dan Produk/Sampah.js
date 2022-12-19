@@ -1,10 +1,8 @@
 import { useState,useEffect } from 'react'
 import Navbar from '../../Components/Navbar'
 import { Helmet } from 'react-helmet'
-import { BsBagDashFill, BsSearch } from 'react-icons/bs'
 import { useParams, useNavigate } from 'react-router-dom';
 import TextTruncate from 'react-text-truncate'
-import { ip } from '../../Host';
 
 const jenisSampah = [{title:'All', routeRequest:'all'},
                     {title:'Plastik', routeRequest:'plastik'}, 
@@ -33,10 +31,10 @@ const FilterJenisSampah = () => {
                         ""
                     ))}
                 <div className='mt-3 pl-2 py-3 shadow-md pr-28'>
-                    <h2 className='font-semibold text-xl ml-2 pr-28 border-b-2 pb-3'>Jenis Produk</h2>
+                    <h2 className='font-semibold text-xl ml-2 pr-28 border-b-2 pb-3'>Jenis Sampah</h2>
                     <ul className='mx-2 space-y-2 mt-2'>
                         {jenisSampah.map((jnsp) => (
-                            <li><a className={params === jnsp.routeRequest ? 'text-red-600 border-l-8 border-red-400' : 'hover:text-red-400 hover:border-red-400 hover:border-l-4 duration-150'} href={`/produk/${jnsp.routeRequest}`}>{jnsp.title}</a></li>
+                            <li><a className={params === jnsp.routeRequest ? 'text-red-600 border-l-8 border-red-400' : 'hover:text-red-400 hover:border-red-400 hover:border-l-4 duration-150'} href={`/sampah/${jnsp.routeRequest}`}>{jnsp.title}</a></li>
                         ))}
                     </ul>
                 </div>

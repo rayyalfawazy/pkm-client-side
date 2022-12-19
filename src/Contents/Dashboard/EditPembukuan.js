@@ -1,5 +1,5 @@
 import { useParams, useNavigate } from 'react-router-dom'
-import { useState, Component, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import AuthNavbar from '../../Components/AuthNavbar'
 import { useDispatch, useSelector } from 'react-redux'
 import { getMe } from '../../Feature/AuthSlice'

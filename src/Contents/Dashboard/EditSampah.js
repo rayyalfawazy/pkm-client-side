@@ -2,7 +2,7 @@ import AuthNavbar from '../../Components/AuthNavbar'
 import { useDispatch, useSelector } from 'react-redux'
 import { getMe } from '../../Feature/AuthSlice'
 import { useParams, useNavigate } from 'react-router-dom'
-import { useState, Component, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import axios from 'axios'
 
 const jenis_sampah_list = [

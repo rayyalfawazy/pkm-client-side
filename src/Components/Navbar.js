@@ -6,15 +6,11 @@ import {
   MenuButton,
   MenuList,
   MenuItem,
-  MenuItemOption,
-  MenuGroup,
-  MenuOptionGroup,
   MenuDivider,
-  Button,
   IconButton
 } from '@chakra-ui/react'
 
-import { ChevronDownIcon, HamburgerIcon } from '@chakra-ui/icons'
+import { HamburgerIcon } from '@chakra-ui/icons'
 
 function Produk() {
   return (

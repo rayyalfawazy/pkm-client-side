@@ -1,23 +1,8 @@
 import { useState,useEffect } from 'react'
 import Navbar from '../../Components/Navbar'
 import { Helmet } from 'react-helmet'
-import { BsBagDashFill, BsSearch } from 'react-icons/bs'
-import { Navigate, useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import TextTruncate from 'react-text-truncate'
-import {
-    Menu,
-    MenuButton,
-    MenuList,
-    MenuItem,
-    MenuItemOption,
-    MenuGroup,
-    MenuOptionGroup,
-    MenuDivider,
-    Button,
-    IconButton
-  } from '@chakra-ui/react'
-  
-import { ChevronDownIcon, HamburgerIcon } from '@chakra-ui/icons'
 
 const jenisSampah = [{title:'All', routeRequest:'all'},
                     {title:'Plastik', routeRequest:'plastik'}, 
