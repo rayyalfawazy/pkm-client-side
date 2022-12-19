@@ -2,7 +2,6 @@ import React, {useState} from 'react'
 import Navbar from '../../Components/Navbar'
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { ip } from '../../Host';
 
 function Register() {
     const [email, setEmail] = useState("");
@@ -26,7 +25,7 @@ function Register() {
         formData.password = password
         formData.confPassword = confPassword
         try {
-            await axios.post(`http://${ip}:5000/users`, formData)
+            await axios.post(`https://api.banksampahanggur.com/users`, formData)
             navigate('/user/login')
         } catch (error) {
             console.log(error)

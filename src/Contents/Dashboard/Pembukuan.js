@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { useParams, useNavigate, json } from 'react-router-dom'
-import Navbar from '../../Components/Navbar'
-import { BsBagDashFill, BsSearch } from 'react-icons/bs'
+import { BsSearch } from 'react-icons/bs'
 import axios from 'axios';
 import AuthNavbar from '../../Components/AuthNavbar';
 import { useDispatch, useSelector } from 'react-redux'
 import { getMe } from '../../Feature/AuthSlice'
 import AuthInformation from './AuthInformation'
-import { ip } from '../../Host';
 
 export default function Pembukuan() {
     const [pembukuan, setPembukuan] = useState([])
@@ -33,7 +31,7 @@ export default function Pembukuan() {
     },[user])
 
     const fetchData = async(e) => {
-        const response = await axios.get(`http://${ip}:5000/pembukuan/filter?search=${querySearch}`)
+        const response = await axios.get(`https://api.banksampahanggur.com/filter?search=${querySearch}`)
         setPembukuan(response.data)
     }
     useEffect(()=>{
@@ -42,11 +40,17 @@ export default function Pembukuan() {
 
     const delData = async (Id) => {
         try {
-            await axios.delete(`http://${ip}:5000/pembukuan/${Id}`)
+            await axios.delete(`https://api.banksampahanggur.com/pembukuan/${Id}`)
             fetchData()
         } catch (error) {
             console.log(error)
         }
+    }
+
+    if (user === null) {
+        return (
+            <p className='text-center mt-5'>Loading Autentication...</p>
+        )
     }
 
     return (
@@ -74,6 +78,7 @@ export default function Pembukuan() {
                     <a className='bg-green-600 text-white p-3 rounded-lg hover:bg-green-500 duration-150' href={`/dashboard/pembukuan/create`}>Tambah Pembukuan</a>
                 </div>
                 {/* Search Bar */}
+                <AuthInformation name={user.name} role={user.role}/>
                 <form className='mr-60 mt-5 sticky top-24'>   
                     <label htmlFor="default-search" className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
                     <div className="relative">

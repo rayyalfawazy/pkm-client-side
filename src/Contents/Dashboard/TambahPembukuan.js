@@ -4,7 +4,6 @@ import { useParams, useNavigate } from 'react-router-dom'
 import { useState, Component } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import axios from 'axios'
-import { ip } from '../../Host'
 import { getMe } from '../../Feature/AuthSlice'
 
 const kategori_penjualan_list = [
@@ -36,7 +35,7 @@ export function CreatePembukuan() {
 
 
     const getMember = async () => {
-        const response = await axios.get(`http://${ip}:5000/users`)
+        const response = await axios.get(`https://api.banksampahanggur.com/users`)
         setDaftarMember(response.data)
     }
 
@@ -69,7 +68,7 @@ export function CreatePembukuan() {
         formData.jenis_sampah = jenis
         try {
             // console.log(formData)
-            await axios.post(`http://${ip}:5000/pembukuan`, formData)
+            await axios.post(`https://api.banksampahanggur.com/pembukuan`, formData)
             navigate('/dashboard/pembukuan')
         } catch (error) {
             console.log(error)

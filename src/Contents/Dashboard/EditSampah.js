@@ -4,7 +4,6 @@ import { getMe } from '../../Feature/AuthSlice'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useState, Component, useEffect } from 'react'
 import axios from 'axios'
-import { ip } from '../../Host'
 
 const jenis_sampah_list = [
     {title:'Plastik', value:'plastik'}, 
@@ -50,7 +49,7 @@ export function EditSampah() {
     },[isError, navigate])
 
     const getProductById = async () => {
-        const response = await axios.get(`http://${ip}:5000/sampah/${id}`)
+        const response = await axios.get(`https://api.banksampahanggur.com/sampah/${id}`)
         setNama(response.data.nama_sampah)
         setJenis(response.data.jenis_sampah)
         setCategory(response.data.kategori_sampah)
@@ -75,7 +74,7 @@ export function EditSampah() {
         formData.deskripsi = deskripsi
         try {
             console.log(formData)
-            await axios.patch(`http://${ip}:5000/sampah/${id}`, formData)
+            await axios.patch(`https://api.banksampahanggur.com/sampah/${id}`, formData)
             navigate('/dashboard/sampah')
         } catch (error) {
             console.log(error)

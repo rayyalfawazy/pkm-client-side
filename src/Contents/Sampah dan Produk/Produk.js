@@ -4,7 +4,6 @@ import { Helmet } from 'react-helmet'
 import { BsBagDashFill, BsSearch } from 'react-icons/bs'
 import { Navigate, useParams, useNavigate } from 'react-router-dom';
 import TextTruncate from 'react-text-truncate'
-import { ip } from '../../Host';
 import {
     Menu,
     MenuButton,
@@ -100,7 +99,7 @@ function Produk() {
     const jenisProduk = Object.values(useParams("plastik"))
     const [dataProduk, setDataProduk] = useState(null)
     useEffect(() => {
-        fetch(`http://${ip}:5000/home/products`)
+        fetch(`https://api.banksampahanggur.com/home/products`)
         .then((response) => response.json())
         .then((json) => setDataProduk(json))
     }, []);

@@ -109,7 +109,7 @@ function Sampah() {
     const jenisSampah = Object.values(useParams())
     const [dataSampah, setDataSampah] = useState(null)
     useEffect(() => {
-        fetch(`http://${ip}:5000/home/sampah`)
+        fetch(`https://api.banksampahanggur.com/home/sampah`)
         .then((response) => response.json())
         .then((json) => setDataSampah(json))
     }, [dataSampah]);

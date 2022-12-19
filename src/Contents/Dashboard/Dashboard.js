@@ -6,7 +6,6 @@ import AuthNavbar from '../../Components/AuthNavbar'
 import { useDispatch, useSelector } from 'react-redux'
 import { getMe } from '../../Feature/AuthSlice'
 import AuthInformation from './AuthInformation'
-import { ip } from '../../Host.js'
 
 
 function GetSampah() {
@@ -20,13 +19,13 @@ function GetSampah() {
         getData()
     }, []);
     const getData = async() => {
-        const response = await axios.get(`http://${ip}:5000/sampah`)
+        const response = await axios.get(`https://api.banksampahanggur.com/sampah`)
         setData(response.data)
     }
 
     const delData = async (Id) => {
         try {
-            await axios.delete(`http://${ip}:5000/sampah/${Id}`)
+            await axios.delete(`https://api.banksampahanggur.com/sampah/${Id}`)
             getData()
         } catch (error) {
             console.log(error)
@@ -113,14 +112,14 @@ function GetProduct() {
         getData()
     }, []);
     const getData = async() => {
-        const response = await axios.get(`http://${ip}:5000/products`)
+        const response = await axios.get(`https://api.banksampahanggur.com/products`)
         setData(response.data)
     }
 
     const delData = async (Id) => {
         try {
             console.log(Id)
-            await axios.delete(`http://${ip}:5000/products/${Id}`)
+            await axios.delete(`https://api.banksampahanggur.com/products/${Id}`)
             getData()
         } catch (error) {
             console.log(error)
