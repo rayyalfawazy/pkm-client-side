@@ -58,7 +58,7 @@ export function EditProduk() {
         formData.deskripsi = deskripsi
         try {
             console.log(formData)
-            await axios.patch(`https://api.banksampahanggur.com/products/${id}`, formData)
+            await axios.put(`https://api.banksampahanggur.com/products/${id}`, formData)
             navigate('/dashboard/produk')
         } catch (error) {
             console.log(error)

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useParams, useNavigate } from 'react-router-dom'
+import { useParams, useNavigate, json } from 'react-router-dom'
 import { BsSearch } from 'react-icons/bs'
 import axios from 'axios';
 import AuthNavbar from '../../Components/AuthNavbar';
@@ -9,6 +9,7 @@ import AuthInformation from './AuthInformation'
 
 export default function Pembukuan() {
     const [pembukuan, setPembukuan] = useState([])
+    const [jumlahPenjualan, setJumlahPenjualan] = useState()
     const [querySearch, setQuerySearch] = useState("")
     const params = String(Object.values(useParams()))
     const dispatch = useDispatch();
