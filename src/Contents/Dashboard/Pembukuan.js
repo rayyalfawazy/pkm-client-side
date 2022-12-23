@@ -29,12 +29,13 @@ export default function Pembukuan() {
         console.log(user)
     },[user])
 
-    const fetchData = async(e) => {
-        const response = await axios.get(`https://api.banksampahanggur.com/filter?search=${querySearch}`)
+    const fetchData = async() => {
+        const response = await axios.get(`https://api.banksampahanggur.com/pembukuan/filter?search=${querySearch}`)
         setPembukuan(response.data)
     }
     useEffect(()=>{
         fetchData()
+        console.log()
     },[querySearch, fetchData])
 
     const delData = async (Id) => {
