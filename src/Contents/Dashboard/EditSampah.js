@@ -62,13 +62,13 @@ export function EditSampah() {
 
     const submit = async (e) => {
         e.preventDefault();
-        let formData = {"nama_sampah":null, 
-                        'jenis_sampah': null,
-                        'kategori_sampah':null,
-                        'harga':null,
-                        'berat':null,
-                        'deskripsi':null,
-                        'file':null};
+        let formData = {"nama_sampah":nama, 
+                        'jenis_sampah': jenis,
+                        'kategori_sampah':category,
+                        'harga':harga,
+                        'berat':berat,
+                        'deskripsi':deskripsi,
+                        'file':file};
         formData.nama_sampah = nama
         formData.jenis_sampah = jenis
         formData.kategori_sampah = category
@@ -77,14 +77,13 @@ export function EditSampah() {
         formData.deskripsi = deskripsi
         formData.file = file
         try {
-            console.log(formData)
             await axios.patch(`${host}/sampah/${id}`, formData, {
                 headers: {
                     "Content-type" : "multipart/form-data"
                 },
             })
-            console.log(formData)
-            // navigate('/dashboard/sampah')
+            // console.log(formData)
+            navigate('/dashboard/sampah')
         } catch (error) {
             console.log(error)
         }
