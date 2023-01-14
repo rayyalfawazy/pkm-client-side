@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getMe } from '../../Feature/AuthSlice'
 import axios from 'axios'
 import AuthNavbar from '../../Components/AuthNavbar'
+import { host } from '../../Host'
 
 const jenis_sampah_list = [
     {title:'Plastik', value:'plastik'}, 
@@ -29,10 +30,18 @@ export function CreateSampah() {
     const [deskripsi, setDeskripsi] = useState("");
     const [harga, setHarga] = useState("");
     const [berat, setBerat] = useState("");
+    const [file, setFile] = useState("");
+    const [preview, setPreview] = useState("");
     const navigate = useNavigate();
 
+    const loadImage = (e) => {
+        const image = e.target.files[0];
+        setFile(image)
+        setPreview(URL.createObjectURL(image))
+    }
+
     const dispatch = useDispatch();
-    const {isError} = useSelector((state => state.auth))
+    const {user, isError} = useSelector((state => state.auth))
 
     useEffect(()=>{
         dispatch(getMe())
@@ -51,20 +60,28 @@ export function CreateSampah() {
                         'kategori_sampah':null,
                         'harga':null,
                         'berat':null,
-                        'deskripsi':null};
+                        'deskripsi':null,
+                        'file':null};
         formData.nama_sampah = nama
         formData.jenis_sampah = jenis
         formData.kategori_sampah = category
         formData.harga = Number(harga)
         formData.berat = Number(berat)
         formData.deskripsi = deskripsi
+        formData.file = file
         try {
-            await axios.post(`https://api.banksampahanggur.com/sampah`, formData)
+            await axios.post(`${host}/sampah`, formData, {
+                headers: {
+                    "Content-type" : "multipart/form-data"
+                }
+            })
             navigate('/dashboard/sampah')
         } catch (error) {
             console.log(error)
         }
     }
+
+    if (!user) return <h1 className='text-center animate-pulse'>Loading Authentication...</h1>
     
     return (
         <div>
@@ -118,6 +135,20 @@ export function CreateSampah() {
                                 value={deskripsi}
                                 onChange={(e) => setDeskripsi(e.target.value)}/>
                     </div>
+                    <div className='space-y-2 block md:space-y-0 md:m-3 md:grid md:grid-cols-4'>
+                        <label className='block'>Gambar : </label>
+                        <input className='border-2 rounded-lg md:ml-5 px-2 py-2 col-span-3 w-full md:w-auto'
+                                type='file'
+                                onChange={loadImage}/>
+                    </div>
+                    {preview ? 
+                    <div className='space-y-2 block md:space-y-0 md:m-3 md:grid md:grid-cols-4'>
+                        <label className='block'>Preview Image : </label>
+                            <figure className='md:ml-5 px-2 py-2 col-span-3 w-auto md:w-52'>
+                                <img src={preview} alt='previewImage'/>
+                            </figure>
+                    </div>
+                    : ""}
                     <button className='py-2 px-4 bg-green-500 rounded-lg text-white'
                             type='submit'>Tambah Sampah</button>
                 </div>

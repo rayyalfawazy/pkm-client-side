@@ -5,6 +5,7 @@ import { useState, Component } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import axios from 'axios'
 import { getMe } from '../../Feature/AuthSlice'
+import { host } from '../../Host'
 
 const kategori_penjualan_list = [
     {title:'Sampah', value:'sampah'},
@@ -35,7 +36,7 @@ export function CreatePembukuan() {
 
 
     const getMember = async () => {
-        const response = await axios.get(`https://api.banksampahanggur.com/users`)
+        const response = await axios.get(`${host}/users`)
         setDaftarMember(response.data)
     }
 
@@ -68,7 +69,7 @@ export function CreatePembukuan() {
         formData.jenis_sampah = jenis
         try {
             // console.log(formData)
-            await axios.post(`https://api.banksampahanggur.com/pembukuan`, formData)
+            await axios.post(`${host}/pembukuan`, formData)
             navigate('/dashboard/pembukuan')
         } catch (error) {
             console.log(error)

@@ -6,6 +6,7 @@ import AuthNavbar from '../../Components/AuthNavbar';
 import { useDispatch, useSelector } from 'react-redux'
 import { getMe } from '../../Feature/AuthSlice'
 import AuthInformation from './AuthInformation'
+import { host } from '../../Host';
 
 export default function Pembukuan() {
     const [pembukuan, setPembukuan] = useState([])
@@ -31,7 +32,7 @@ export default function Pembukuan() {
     },[user])
 
     const fetchData = async() => {
-        const response = await axios.get(`https://api.banksampahanggur.com/pembukuan/filter?search=${querySearch}`)
+        const response = await axios.get(`${host}/pembukuan/filter?search=${querySearch}`)
         setPembukuan(response.data)
     }
     useEffect(()=>{

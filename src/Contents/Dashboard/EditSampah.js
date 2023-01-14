@@ -4,6 +4,7 @@ import { getMe } from '../../Feature/AuthSlice'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
+import { host } from '../../Host'
 
 const jenis_sampah_list = [
     {title:'Plastik', value:'plastik'}, 
@@ -29,33 +30,34 @@ export function EditSampah() {
     const [deskripsi, setDeskripsi] = useState("");
     const [harga, setHarga] = useState("");
     const [berat, setBerat] = useState("");
+    const [file, setFile] = useState("");
+    const [preview, setPreview] = useState("");
     const navigate = useNavigate();
+
+    const dispatch = useDispatch()
+    const {user, isError} = useSelector((state => state.auth))
 
     useEffect(() => {
         getProductById()
     }, []);
 
-    const dispatch = useDispatch();
-    const {isError} = useSelector((state => state.auth))
-
-    useEffect(()=>{
-        dispatch(getMe())
-    },[dispatch])
-
-    useEffect(()=>{
-        if (isError) {
-            navigate('/user/login')
-        }
-    },[isError, navigate])
-
+ 
     const getProductById = async () => {
-        const response = await axios.get(`https://api.banksampahanggur.com/sampah/${id}`)
+        const response = await axios.get(`${host}/sampah/${id}`)
         setNama(response.data.nama_sampah)
         setJenis(response.data.jenis_sampah)
         setCategory(response.data.kategori_sampah)
         setBerat(response.data.berat)
         setHarga(response.data.harga)
         setDeskripsi(response.data.deskripsi)
+        setFile(response.data.image)
+        setPreview(response.data.url)
+    }
+
+    const loadImage = (e) => {
+        const image = e.target.files[0];
+        setFile(image)
+        setPreview(URL.createObjectURL(image))
     }
 
     const submit = async (e) => {
@@ -65,21 +67,40 @@ export function EditSampah() {
                         'kategori_sampah':null,
                         'harga':null,
                         'berat':null,
-                        'deskripsi':null};
+                        'deskripsi':null,
+                        'file':null};
         formData.nama_sampah = nama
         formData.jenis_sampah = jenis
         formData.kategori_sampah = category
         formData.harga = Number(harga)
         formData.berat = Number(berat)
         formData.deskripsi = deskripsi
+        formData.file = file
         try {
             console.log(formData)
-            await axios.patch(`https://api.banksampahanggur.com/sampah/${id}`, formData)
-            navigate('/dashboard/sampah')
+            await axios.patch(`${host}/sampah/${id}`, formData, {
+                headers: {
+                    "Content-type" : "multipart/form-data"
+                },
+            })
+            console.log(formData)
+            // navigate('/dashboard/sampah')
         } catch (error) {
             console.log(error)
         }
     }
+
+    useEffect(()=>{
+        dispatch(getMe())
+    }, [dispatch])
+
+    useEffect(()=>{
+        if (isError) {
+            navigate('/user/login')
+        }
+    },[isError, navigate])
+
+    if (!user) return <h1 className='text-center animate-pulse'>Loading Authentication...</h1>
     
     return (
         <div>
@@ -133,6 +154,20 @@ export function EditSampah() {
                                 value={deskripsi}
                                 onChange={(e) => setDeskripsi(e.target.value)}/>
                     </div>
+                    <div className='space-y-2 block md:space-y-0 md:m-3 md:grid md:grid-cols-4'>
+                        <label className='block'>Gambar : </label>
+                        <input className='border-2 rounded-lg md:ml-5 px-2 py-2 col-span-3 w-full md:w-auto'
+                                type='file'
+                                onChange={loadImage}/>
+                    </div>
+                    {preview ? 
+                    <div className='space-y-2 block md:space-y-0 md:m-3 md:grid md:grid-cols-4'>
+                        <label className='block'>Preview Image : </label>
+                            <figure className='md:ml-5 px-2 py-2 col-span-3 w-auto md:w-52'>
+                                <img src={preview} alt='previewImage'/>
+                            </figure>
+                    </div>
+                    : ""}
                     <button className='py-2 px-4 bg-green-500 rounded-lg text-white'
                             type='submit'>Update Sampah</button>
                 </div>

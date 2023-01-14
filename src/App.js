@@ -4,28 +4,28 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getMe } from './Feature/AuthSlice';
+import AuthNavbar from './Components/AuthNavbar';
 
 function App() {
   const images = 'https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80'
-  const {isSuccess, user} = useSelector((state) => state.auth)
-  const navigate = useNavigate();
+  const {user} = useSelector((state) => state.auth)
   const dispatch = useDispatch();
 
   useEffect(()=>{
     dispatch(getMe())
   },[dispatch])
 
-  useEffect(()=>{
-    if (user) {
-        navigate('/dashboard/sampah')
-    }
-},[user, navigate])
+  // useEffect(()=>{
+  //   if (user) {
+  //       navigate('/dashboard/sampah')
+  //   }
+  // },[user, navigate])
   return (
     <div>
       <Helmet>
         <title>Title | Beranda</title>
       </Helmet>
-      <Navbar/>
+      {user ? <AuthNavbar/> : <Navbar/>}
       <div>
         <img className='w-full object-none object-bottom h-[870px]' src={images} alt='images'/>
       </div>

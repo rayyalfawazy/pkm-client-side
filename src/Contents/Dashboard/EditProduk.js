@@ -4,6 +4,7 @@ import { getMe } from '../../Feature/AuthSlice'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useState, Component, useEffect } from 'react'
 import axios from 'axios'
+import { host } from '../../Host'
 
 const jenis_sampah_list = [
     {title:'Plastik', value:'plastik'}, 
@@ -39,7 +40,7 @@ export function EditProduk() {
     },[isError, navigate])
 
     const getProductById = async () => {
-        const response = await axios.get(`https://api.banksampahanggur.com/products/${id}`)
+        const response = await axios.get(`${host}/products/${id}`)
         setNama(response.data.nama_produk)
         setJenis(response.data.jenis_produk)
         setHarga(response.data.harga)
@@ -58,7 +59,7 @@ export function EditProduk() {
         formData.deskripsi = deskripsi
         try {
             console.log(formData)
-            await axios.put(`https://api.banksampahanggur.com/products/${id}`, formData)
+            await axios.put(`${host}/products/${id}`, formData)
             navigate('/dashboard/produk')
         } catch (error) {
             console.log(error)

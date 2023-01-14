@@ -4,6 +4,7 @@ import AuthNavbar from '../../Components/AuthNavbar'
 import { useDispatch, useSelector } from 'react-redux'
 import { getMe } from '../../Feature/AuthSlice'
 import axios from 'axios'
+import { host } from '../../Host'
 
 const kategori_penjualan_list = [
     {title:'Sampah', value:'sampah'},
@@ -47,12 +48,12 @@ export function EditPembukuan() {
     },[isError, navigate])
 
     const getMember = async () => {
-        const response = await axios.get(`https://api.banksampahanggur.com/users`)
+        const response = await axios.get(`${host}/users`)
         setDaftarMember(response.data)
     }
 
     const getPembukuanById = async () => {
-        const response = await axios.get(`https://api.banksampahanggur.com/pembukuan/${id}`)
+        const response = await axios.get(`${host}/pembukuan/${id}`)
         setNamaMember(response.data.userId)
         setTanggal(response.data.tanggal_penjualan)
         setTotalPenjualan(response.data.total_penjualan)

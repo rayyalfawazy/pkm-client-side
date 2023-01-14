@@ -13,13 +13,12 @@ function Login() {
 
     const Auth = (e) => {
         e.preventDefault();
-        console.log(message)
         dispatch(LoginUser({email, password}));
     }
 
     useEffect(() =>{
         if (user || isSuccess) {
-            navigate('/dashboard/sampah')
+            navigate('/')
         } else {
             dispatch(reset());
         }

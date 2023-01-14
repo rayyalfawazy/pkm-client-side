@@ -1,8 +1,12 @@
 import { useState,useEffect } from 'react'
 import Navbar from '../../Components/Navbar'
 import { Helmet } from 'react-helmet'
+import { getMe } from '../../Feature/AuthSlice';
+import { useSelector, useDispatch } from 'react-redux';
 import { useParams, useNavigate } from 'react-router-dom';
 import TextTruncate from 'react-text-truncate'
+import AuthNavbar from '../../Components/AuthNavbar';
+import { host } from '../../Host';
 
 const jenisSampah = [{title:'All', routeRequest:'all'},
                     {title:'Plastik', routeRequest:'plastik'}, 
@@ -52,7 +56,7 @@ const SingleProduct = ({nama, harga, deskripsi, jenis, user}) => {
   return (
     <div className='border rounded-lg md:grid md:grid-cols-5'>
         <div className='bg-gray-500 rounded-t-lg md:rounded-tr-none md:rounded-l-lg'>
-            <img src='https://rare-gallery.com/thumbs/862283-Ferrari-Scuderia-Italia-Forza-Horizon-4-Front-Red.jpg'
+            <img src='https://www.faceapp.com/static/img/content/compare/beard-example-before@3x.jpg'
                 alt='image'
                 className='object-contain h-60 w-96 object-center rounded-l-lg'/>
         </div>
@@ -80,18 +84,23 @@ const SingleProduct = ({nama, harga, deskripsi, jenis, user}) => {
 
 
 function Produk() {
-    const navigate = useNavigate()
+    const {user} = useSelector((state) => state.auth)
+    const dispatch = useDispatch();
     const jenisProduk = Object.values(useParams("plastik"))
     const [dataProduk, setDataProduk] = useState(null)
     useEffect(() => {
-        fetch(`https://api.banksampahanggur.com/home/products`)
+        fetch(`${host}/home/products`)
         .then((response) => response.json())
         .then((json) => setDataProduk(json))
     }, []);
+
+    useEffect(()=>{
+        dispatch(getMe())
+      },[dispatch])
+    
     if (dataProduk === null) {
         return (
             <div>
-                <Navbar/>
                 <p className='text-center mt-10 text-2xl animate-ping'>Loading....</p>
             </div>
         )
@@ -101,7 +110,7 @@ function Produk() {
             <Helmet>
                 <title>Title | Sampah</title>
             </Helmet>
-            <Navbar/>
+            {user ? <AuthNavbar/> : <Navbar/>}
             {/* <form className='mx-60 mt-5 sticky top-24'>   
                 <label htmlFor="default-search" className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
                 <div className="relative">

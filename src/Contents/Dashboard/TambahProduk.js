@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getMe } from '../../Feature/AuthSlice'
 import axios from 'axios'
 import AuthNavbar from '../../Components/AuthNavbar'
+import { host } from '../../Host'
 
 const jenis_sampah_list = [
     {title:'Plastik', value:'plastik'}, 
@@ -46,7 +47,7 @@ export function CreateProduk() {
         formData.deskripsi = deskripsi
         try {
             console.log(formData)
-            await axios.post(`https://api.banksampahanggur.com/products`, formData)
+            await axios.post(`https://${host}/products`, formData)
             navigate('/dashboard/produk')
         } catch (error) {
             console.log(error)

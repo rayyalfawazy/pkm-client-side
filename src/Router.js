@@ -14,6 +14,7 @@ import { EditProduk } from './Contents/Dashboard/EditProduk';
 import Pembukuan from './Contents/Dashboard/Pembukuan';
 import { CreatePembukuan } from './Contents/Dashboard/TambahPembukuan';
 import { EditPembukuan } from './Contents/Dashboard/EditPembukuan';
+import TestSide from './Contents/TestSide';
 
 export const Router = () => (
     <Routes>
@@ -22,6 +23,7 @@ export const Router = () => (
       <Route path='/sampah/:jenis' element={<Sampah/>}/>
       <Route path='/produk/' element={<Produk/>}/>
       <Route path='/produk/:jenis' element={<Produk/>}/>
+      <Route path='/ongkir' element={<TestSide/>}/>
 
       {/* Dashboard Routes */}
       <Route path='/dashboard/:jenis' element={<Dashboard/>} exact/>

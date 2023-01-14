@@ -1,8 +1,12 @@
 import { useState,useEffect } from 'react'
 import Navbar from '../../Components/Navbar'
 import { Helmet } from 'react-helmet'
+import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useNavigate } from 'react-router-dom';
 import TextTruncate from 'react-text-truncate'
+import { host } from '../../Host';
+import { getMe } from '../../Feature/AuthSlice';
+import AuthNavbar from '../../Components/AuthNavbar';
 
 const jenisSampah = [{title:'All', routeRequest:'all'},
                     {title:'Plastik', routeRequest:'plastik'}, 
@@ -11,11 +15,11 @@ const jenisSampah = [{title:'All', routeRequest:'all'},
                     {title:'Kaleng', routeRequest:'kaleng'}, 
                     {title:'Limbah Elektronik', routeRequest:'limbahelektronik'}]
 
-const category = [{title:'Multi Layer', routeRequest:'multilayer'}, 
-                    {title:'Botol', routeRequest:'botol'}, 
-                    {title:'Kemasan', routeRequest:'kemasan'}, 
-                    {title:'Trash Bag', routeRequest:'trashbag'}, 
-                    {title:'Styrofoam', routeRequest:'styrofoam'}]
+// const category = [{title:'Multi Layer', routeRequest:'multilayer'}, 
+//                     {title:'Botol', routeRequest:'botol'}, 
+//                     {title:'Kemasan', routeRequest:'kemasan'}, 
+//                     {title:'Trash Bag', routeRequest:'trashbag'}, 
+//                     {title:'Styrofoam', routeRequest:'styrofoam'}]
 
 const FilterJenisSampah = () => {
     const params = String(Object.values(useParams()))
@@ -52,33 +56,14 @@ const FilterJenisSampah = () => {
     );
 }
 
-// const FilterCategory = () => {
-//     return (
-//         <div>
-//             <div className=' mt-3 pl-2 pr-5 py-3 shadow-md'>
-//                 <h1 className='font-semibold text-xl mx-2 border-b pb-3'>Kategori - (Kategori)</h1>
-//                 <ul className='mx-2 space-y-2 mt-2'>
-//                     {jenisSampah.map((jnsp) => (
-//                         category.map((c) => (
-//                             <li><a href={`/sampah/${jnsp.route}?category=${c.routeRequest}`}>{c.title}</a></li>
-//                         ))
-//                     ))}
-//                 </ul>
-//             </div>
-//         </div>
-//     );
-// }
 
-
-const SingleProduct = ({nama, harga, berat, deskripsi, jenis, kategori, user}) => {
+const SingleProduct = ({nama, harga, berat, deskripsi, jenis, kategori, user, image}) => {
   return (
-    <div className='border rounded-lg md:grid md:grid-cols-5'>
-        <div className='bg-gray-500 rounded-t-lg md:rounded-tr-none md:rounded-l-lg'>
-            <img src='https://rare-gallery.com/thumbs/862283-Ferrari-Scuderia-Italia-Forza-Horizon-4-Front-Red.jpg'
-                    alt='image'
-                    className='object-cover h-60 w-96 object-center rounded-l-lg'/>
+    <div className='border-2 rounded-lg md:flex'>
+        <div className=' w-[300px]'>
+            <img src={image} alt='sampah' className='object-cover rounded-l-xl w-full items-center'/>
         </div>
-        <div className='m-5 col-span-4 space-y-3'>
+        <div className='m-5 space-y-3'>
             <h1 className='font-semibold text-2xl'>{nama}</h1>
             <h2 className='font-semibold text-xl'>Rp.{harga.toLocaleString('en-US')}</h2>
             <h2 className='font-semibold text-md text-gray-500'>Berat : {berat} Kg</h2>
@@ -92,7 +77,6 @@ const SingleProduct = ({nama, harga, berat, deskripsi, jenis, kategori, user}) =
                 element="span"
                 truncateText="…"
                 text={`${deskripsi}.`}
-                textTruncateChild={<a href="#"></a>}
             />
             <br/>
             <button className='bg-green-600 py-2 px-3 text-white'>Add to Cart</button>
@@ -102,29 +86,35 @@ const SingleProduct = ({nama, harga, berat, deskripsi, jenis, kategori, user}) =
 }
 
 
-
 function Sampah() {
+    const {user} = useSelector((state) => state.auth)
+    const dispatch = useDispatch();
     const jenisSampah = Object.values(useParams())
     const [dataSampah, setDataSampah] = useState(null)
     useEffect(() => {
-        fetch(`https://api.banksampahanggur.com/home/sampah`)
+        fetch(`${host}/home/sampah`)
         .then((response) => response.json())
         .then((json) => setDataSampah(json))
     }, [dataSampah]);
+
+    useEffect(()=>{
+        dispatch(getMe())
+      },[dispatch])
+
     if (dataSampah === null) {
         return (
             <div>
-                <Navbar/>
                 <p className='text-center mt-10 text-2xl animate-ping'>Loading...</p>
             </div>
         )
     }
+    
     return (
         <div>
             <Helmet>
                 <title>Title | Sampah</title>
             </Helmet>
-            <Navbar/>
+            {user ? <AuthNavbar/> : <Navbar/>}
             {/* <form className='mx-60 mt-5 sticky top-24'>   
                 <label htmlFor="default-search" className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
                 <div className="relative">
@@ -147,7 +137,8 @@ function Sampah() {
                                             deskripsi={fds.deskripsi} 
                                             jenis={fds.jenis_sampah} 
                                             user={fds.user.name} 
-                                            kategori={fds.kategori_sampah}/>
+                                            kategori={fds.kategori_sampah}
+                                            image={fds.url}/>
                         ))
                         :
                         dataSampah.map((ds) => (
@@ -157,7 +148,8 @@ function Sampah() {
                                             deskripsi={ds.deskripsi} 
                                             jenis={ds.jenis_sampah} 
                                             user={ds.user.name} 
-                                            kategori={ds.kategori_sampah}/>
+                                            kategori={ds.kategori_sampah}
+                                            image={ds.url}/>
                         ))
                     }
                 </aside>

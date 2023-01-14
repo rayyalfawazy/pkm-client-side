@@ -6,7 +6,7 @@ import AuthNavbar from '../../Components/AuthNavbar'
 import { useDispatch, useSelector } from 'react-redux'
 import { getMe } from '../../Feature/AuthSlice'
 import AuthInformation from './AuthInformation'
-
+import { host } from '../../Host'
 
 function GetSampah() {
     const [data, setData] = useState(null)
@@ -19,13 +19,13 @@ function GetSampah() {
         getData()
     }, []);
     const getData = async() => {
-        const response = await axios.get(`https://api.banksampahanggur.com/sampah`)
+        const response = await axios.get(`${host}/sampah`)
         setData(response.data)
     }
 
     const delData = async (Id) => {
         try {
-            await axios.delete(`https://api.banksampahanggur.com/sampah/${Id}`)
+            await axios.delete(`${host}/sampah/${Id}`)
             getData()
         } catch (error) {
             console.log(error)
@@ -40,14 +40,14 @@ function GetSampah() {
         if (isError) {
             navigate('/user/login')
         }
-    },[isError, navigate, user])
+    },[isError, navigate])
 
-    const SingleProductSampah = ({id, nama, harga, berat, jenis, kategori,  deskripsi, user, editable}) => {
+    const SingleProductSampah = ({id, nama, harga, berat, jenis, kategori,  deskripsi, user, editable, image}) => {
         return (
           <div className='border rounded-lg md:grid md:grid-cols-5'>
               <div className='bg-gray-500 rounded-l-lg rounded-t-lg md:rounded-tr-none md:rounded-l-lg'>
-                <img src='https://rare-gallery.com/thumbs/862283-Ferrari-Scuderia-Italia-Forza-Horizon-4-Front-Red.jpg'
-                    alt='image'
+                <img src={image}
+                    alt='sampah'
                     className='object-contain h-64 w-96 object-center rounded-l-lg'/>
               </div>
               <div className='m-5 md:col-span-4 space-y-3'>
@@ -97,7 +97,8 @@ function GetSampah() {
                     id={d.id} 
                     deskripsi={d.deskripsi}
                     user={d.user.name}
-                    editable={user.role === "admin" || user.role ==="member" ? true : false}/>
+                    editable={user.role === "admin" || user.role ==="member" ? true : false}
+                    image={d.url}/>
             ))}
         </div>
     )
@@ -112,25 +113,25 @@ function GetProduct() {
         getData()
     }, []);
     const getData = async() => {
-        const response = await axios.get(`https://api.banksampahanggur.com/products`)
+        const response = await axios.get(`${host}/products`)
         setData(response.data)
     }
 
     const delData = async (Id) => {
         try {
             console.log(Id)
-            await axios.delete(`https://api.banksampahanggur.com/products/${Id}`)
+            await axios.delete(`${host}/products/${Id}`)
             getData()
         } catch (error) {
             console.log(error)
         }
     }
 
-    const SingleProduct = ({id, nama, harga, deskripsi, jenis, user}) => {
+    const SingleProduct = ({id, nama, harga, deskripsi, jenis, user, image}) => {
         return (
             <div className='border rounded-lg md:grid md:grid-cols-5'>
               <div className='bg-gray-500 rounded-t-lg md:rounded-tr-none md:rounded-l-lg'>
-                <img src='https://rare-gallery.com/thumbs/862283-Ferrari-Scuderia-Italia-Forza-Horizon-4-Front-Red.jpg'
+                <img src={image}
                     alt='image'
                     className='object-contain h-52 w-96 object-center rounded-l-lg'/>
               </div>

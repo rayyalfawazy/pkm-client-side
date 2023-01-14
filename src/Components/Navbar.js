@@ -16,23 +16,20 @@ function Produk() {
   return (
     <div className='bg-white px-60 py-10 border rounded-b-lg grid grid-cols-2 gap-5 w-full'>
       <div className='bg-gray-300 py-5 rounded-lg'>
-        <h1 className='text-center m-4'><a href='/sampah'>Beli Sampah</a></h1>
+        <h1 className='text-center m-4'><NavLink to='/sampah'>Beli Sampah</NavLink></h1>
       </div>
       <div className='bg-gray-300 py-5 rounded-lg'>
-        <h1 className='text-center m-4'><a href='/produk/all'>Beli Produk</a></h1>
+        <h1 className='text-center m-4'><NavLink to='/produk/all'>Beli Produk</NavLink></h1>
       </div>
     </div>
   )
 }
 
 function Navbar() {
-  const [auth, setAuth] = useState()
-  const route = useLocation()
-  const params = useParams()
   const [open, makeOpen] = useState(false);
   const handleProdukDropdown = () => {
     makeOpen(true)
-    if (open === true) {
+    if (open) {
       makeOpen(false)
     }
   }
@@ -84,7 +81,7 @@ function Navbar() {
         </ul>
       </div>
       <div className=''>
-      {open === true ? <Produk/> : ""}
+      {open ? <Produk/> : ""}
       </div>
     </div>
 
